@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { usePopper } from "react-popper";
 
@@ -60,9 +61,12 @@ const PopperComponent = ({
         >
           <div className="px-6 py-4 w-full flex flex-col items-center">
             <div className="font-bold text-xl mb-4 text-center">{content}</div>
-            <button className="py-3 w-full bg-gray-800 text-white text-sm font-semibold hover:bg-gray-900">
+            <Link
+              href="/teaching"
+              className="py-3 w-full bg-gray-800 text-white text-sm font-semibold hover:bg-gray-900 text-center"
+            >
               {buttonContent}
-            </button>
+            </Link>
           </div>
         </div>
       )}
