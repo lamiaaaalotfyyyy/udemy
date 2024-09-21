@@ -20,9 +20,9 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import MultiLevelDropdown from "../MultiLevelDropdown/MultiLevelDropdown";
-import { usePopper } from "react-popper";
 import PopperComponent from "../Popper/Popper";
 import CartPopper from "../CartPopper/CartPopper";
+import Link from "next/link";
 
 const products = [
   {
@@ -67,7 +67,7 @@ export default function Header() {
         className="mx-auto flex items-center justify-between p-4 lg:px-6"
       >
         <div className="flex order-2 lg:order-0">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <Image
               alt=""
@@ -76,7 +76,7 @@ export default function Header() {
               width={91}
               height={34}
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden order-1 lg:order-2">
           <button
@@ -141,42 +141,43 @@ export default function Header() {
             placement="bottom"
             buttonContent="Learn More"
           />
+          <Link href="/cart">
+            <CartPopper
+              trigger={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-6 w-6 text-gray-800 hover:text-violet-600 "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6.5M7 13l-1-4M10 16.5c.828 0 1.5.672 1.5 1.5S10.828 19.5 10 19.5 8.5 18.828 8.5 18s.672-1.5 1.5-1.5zm7.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S16 18.828 16 18s.672-1.5 1.5-1.5z"
+                  />
+                </svg>
+              }
+              content="Your cart is empty."
+              placement="bottom"
+              buttonContent="Keep Shopping"
+            />
+          </Link>
 
-          <CartPopper
-            trigger={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-6 w-6 text-gray-800 hover:text-violet-600 "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6.5M7 13l-1-4M10 16.5c.828 0 1.5.672 1.5 1.5S10.828 19.5 10 19.5 8.5 18.828 8.5 18s.672-1.5 1.5-1.5zm7.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S16 18.828 16 18s.672-1.5 1.5-1.5z"
-                />
-              </svg>
-            }
-            content="Your cart is empty."
-            placement="bottom"
-            buttonContent="Keep Shopping"
-          />
-
-          <a
-            href="#"
-            className="px-4 py-3 border border-gray-400  text-sm font-semibold text-gray-800 hover:bg-gray-200"
+          <Link
+            href="/login"
+            className="px-5 py-3 border border-gray-400  text-sm font-bold text-gray-800 hover:bg-gray-200"
           >
             Log in
-          </a>
+          </Link>
 
-          <a
-            href="#"
-            className="px-4 py-3 bg-gray-800 text-white text-sm font-semibold hover:bg-gray-900"
+          <Link
+            href="/signup"
+            className="px-5 py-3 bg-gray-800 text-white text-sm font-bold hover:bg-gray-900"
           >
             Sign up
-          </a>
+          </Link>
           <div className="border border-gray-400 p-2 hover:bg-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"

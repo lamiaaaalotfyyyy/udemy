@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState, useRef, useEffect } from "react";
 import { usePopper } from "react-popper";
 
@@ -62,9 +63,12 @@ const CartPopper = ({
             <div className="text-base font-sans text-gray-500	mb-1 text-center font-semibold">
               {content}
             </div>
-            <button className="py-3 w-full text-violet-600 text-sm font-bold hover:text-violet-900">
+            <Link
+              href="/"
+              className="py-3 w-full text-violet-600 text-sm font-bold hover:text-violet-900 text-center	"
+            >
               {buttonContent}
-            </button>
+            </Link>
           </div>
         </div>
       )}
