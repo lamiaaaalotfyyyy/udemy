@@ -20,6 +20,9 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import MultiLevelDropdown from "../MultiLevelDropdown/MultiLevelDropdown";
+import { usePopper } from "react-popper";
+import PopperComponent from "../Popper/Popper";
+import CartPopper from "../CartPopper/CartPopper";
 
 const products = [
   {
@@ -98,39 +101,68 @@ export default function Header() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             className="absolute left-3 top-3 h-5 w-5 text-gray-400"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 1 0-10.61-10.61 7.5 7.5 0 0 0 10.61 10.61z"
             />
           </svg>
         </div>
 
         <div className="hidden lg:flex lg:justify-end lg:order-3 items-center space-x-4">
-          <a href="#" className="text-sm text-gray-800  hover:text-violet-600">
-            Udemy Business
-          </a>
-          <a href="#" className="text-sm text-gray-800  hover:text-violet-600">
-            Teach on Udemy
-          </a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="h-6 w-6 text-gray-800 hover:text-violet-600  "
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6.5M7 13l-1-4M10 16.5c.828 0 1.5.672 1.5 1.5S10.828 19.5 10 19.5 8.5 18.828 8.5 18s.672-1.5 1.5-1.5zm7.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S16 18.828 16 18s.672-1.5 1.5-1.5z"
-            />
-          </svg>
+          <PopperComponent
+            trigger={
+              <a
+                href="#"
+                className="text-sm text-gray-800 hover:text-violet-600"
+              >
+                Udemy Business
+              </a>
+            }
+            content="Get your team access to over 27,000 top Udemy courses, anytime, anywhere."
+            placement="bottom"
+            buttonContent="Try Udemy Business"
+          />
+
+          <PopperComponent
+            trigger={
+              <a
+                href="#"
+                className="text-sm text-gray-800 hover:text-violet-600"
+              >
+                Teach on Udemy
+              </a>
+            }
+            content="Become an instructor and share your knowledge with millions of students worldwide."
+            placement="bottom"
+            buttonContent="Learn More"
+          />
+
+          <CartPopper
+            trigger={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-6 w-6 text-gray-800 hover:text-violet-600 "
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6.5M7 13l-1-4M10 16.5c.828 0 1.5.672 1.5 1.5S10.828 19.5 10 19.5 8.5 18.828 8.5 18s.672-1.5 1.5-1.5zm7.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S16 18.828 16 18s.672-1.5 1.5-1.5z"
+                />
+              </svg>
+            }
+            content="Your cart is empty."
+            placement="bottom"
+            buttonContent="Keep Shopping"
+          />
 
           <a
             href="#"
