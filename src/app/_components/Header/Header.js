@@ -130,12 +130,12 @@ export default function Header() {
 
           <PopperComponent
             trigger={
-              <a
-                href="#"
+              <Link
+                href="/teaching"
                 className="text-sm text-gray-800 hover:text-violet-600"
               >
                 Teach on Udemy
-              </a>
+              </Link>
             }
             content="Become an instructor and share your knowledge with millions of students worldwide."
             placement="bottom"
