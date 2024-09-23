@@ -16,7 +16,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "img-c.udemycdn.com",
+        hostname: "img-b.udemycdn.com",
         port: "",
         pathname: "/**",
       },

@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
+import BroadSelection from "./broadSelection/page";
 import "./globals.css";
+import LandingPage from "./landingPage/page";
 import Header from "./_components/Header/Header";
 import Footer from "./_components/Footer/Footer";
 
@@ -22,11 +24,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="font-serif">
         <Header />
         {children}
+        <LandingPage />
+        <BroadSelection />
         <Footer />
       </body>
     </html>
