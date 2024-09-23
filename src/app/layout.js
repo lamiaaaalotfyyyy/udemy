@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
+import BroadSelection from "./broadSelection/page";
 import "./globals.css";
+import LandingPage from "./landingPage/page";
 import Header from "./_components/Header/Header";
 
 const geistSans = localFont({
@@ -22,10 +24,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="font-serif"
       >
-        <Header></Header>
+        <Header/>
+        <LandingPage/>
+        <BroadSelection/>
         {children}
+        
       </body>
     </html>
   );
