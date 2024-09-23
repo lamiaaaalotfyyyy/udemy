@@ -7,10 +7,6 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
 } from "@headlessui/react";
 import {
   ArrowPathIcon,
@@ -21,12 +17,12 @@ import {
   SquaresPlusIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import MultiLevelDropdown from "../MultiLevelDropdown/MultiLevelDropdown";
+import PopperComponent from "../Popper/Popper";
+import CartPopper from "../CartPopper/CartPopper";
+import Link from "next/link";
 
 const products = [
   {
@@ -61,10 +57,8 @@ const products = [
   },
 ];
 
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
 
   return (
     <header className="bg-white shadow-md">
@@ -73,7 +67,7 @@ export default function Header() {
         className="mx-auto flex items-center justify-between p-4 lg:px-6"
       >
         <div className="flex order-2 lg:order-0">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <Image
               alt=""
@@ -82,7 +76,7 @@ export default function Header() {
               width={91}
               height={34}
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden order-1 lg:order-2">
           <button
@@ -94,45 +88,10 @@ export default function Header() {
             <Bars3Icon aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
-        <PopoverGroup className="hidden lg:flex lg:gap-x-12 lg:order-2">
-          <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 text-md leading-6 text-gray-900 hover:text-violet-600 ">
-              category
-            </PopoverButton>
-
-            <PopoverPanel
-              transition
-              className="absolute -left-8 top-full z-10 mt-8 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
-            >
-              <div className="p-4">
-                {products.map((item) => (
-                  <div
-                    key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                  >
-                    <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon
-                        aria-hidden="true"
-                        className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-                      />
-                    </div>
-                    <div className="flex-auto">
-                      <a
-                        href={item.href}
-                        className="block font-semibold text-gray-900"
-                      >
-                        {item.name}
-                        <span className="absolute inset-0" />
-                      </a>
-                      <p className="mt-1 text-gray-600">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </PopoverPanel>
-          </Popover>
-        </PopoverGroup>
-        <div className="relative w-full max-w-[42rem] hidden lg:flex lg:order-3">
+        <div className="hidden lg:flex lg:gap-x-12 lg:order-2">
+          <MultiLevelDropdown />
+        </div>
+        <div className="relative w-full max-w-[45rem] hidden lg:flex lg:order-3">
           <input
             type="text"
             placeholder="Search for anything"
@@ -142,53 +101,83 @@ export default function Header() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
-            className="absolute left-3 top-4 h-5 w-5 text-gray-400"
+            className="absolute left-3 top-3 h-5 w-5 text-gray-400"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M21 21l-4.35-4.35m0 0a7.5 7.5 0 1 0-10.61-10.61 7.5 7.5 0 0 0 10.61 10.61z"
             />
           </svg>
         </div>
 
         <div className="hidden lg:flex lg:justify-end lg:order-3 items-center space-x-4">
-          <a href="#" className="text-sm text-gray-800  hover:text-violet-600">
-            Udemy Business
-          </a>
-          <a href="#" className="text-sm text-gray-800  hover:text-violet-600">
-            Teach on Udemy
-          </a>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="h-6 w-6 text-gray-800 hover:text-violet-600  "
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6.5M7 13l-1-4M10 16.5c.828 0 1.5.672 1.5 1.5S10.828 19.5 10 19.5 8.5 18.828 8.5 18s.672-1.5 1.5-1.5zm7.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S16 18.828 16 18s.672-1.5 1.5-1.5z"
-            />
-          </svg>
+          <PopperComponent
+            trigger={
+              <a
+                href="#"
+                className="text-sm text-gray-800 hover:text-violet-600"
+              >
+                Udemy Business
+              </a>
+            }
+            content="Get your team access to over 27,000 top Udemy courses, anytime, anywhere."
+            placement="bottom"
+            buttonContent="Try Udemy Business"
+          />
 
-          <a
-            href="#"
-            className="px-4 py-3 border border-gray-400  text-sm font-semibold text-gray-800 hover:bg-gray-200"
+          <PopperComponent
+            trigger={
+              <Link
+                href="/teaching"
+                className="text-sm text-gray-800 hover:text-violet-600"
+              >
+                Teach on Udemy
+              </Link>
+            }
+            content="Become an instructor and share your knowledge with millions of students worldwide."
+            placement="bottom"
+            buttonContent="Learn More"
+          />
+          <Link href="/cart">
+            <CartPopper
+              trigger={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-6 w-6 text-gray-800 hover:text-violet-600 "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6.5M7 13l-1-4M10 16.5c.828 0 1.5.672 1.5 1.5S10.828 19.5 10 19.5 8.5 18.828 8.5 18s.672-1.5 1.5-1.5zm7.5 0c.828 0 1.5.672 1.5 1.5s-.672 1.5-1.5 1.5S16 18.828 16 18s.672-1.5 1.5-1.5z"
+                  />
+                </svg>
+              }
+              content="Your cart is empty."
+              placement="bottom"
+              buttonContent="Keep Shopping"
+            />
+          </Link>
+
+          <Link
+            href="/login"
+            className="px-5 py-3 border border-gray-400  text-sm font-bold text-gray-800 hover:bg-gray-200"
           >
             Log in
-          </a>
+          </Link>
 
-          <a
-            href="#"
-            className="px-4 py-3 bg-gray-800 text-white text-sm font-semibold hover:bg-gray-900"
+          <Link
+            href="/signup"
+            className="px-5 py-3 bg-gray-800 text-white text-sm font-bold hover:bg-gray-900"
           >
             Sign up
-          </a>
+          </Link>
           <div className="border border-gray-400 p-2 hover:bg-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
