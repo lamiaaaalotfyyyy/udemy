@@ -4,11 +4,11 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-black  text-gray-100 ">
-        <div className="px-8 py-4 flex md:flex-col  lg:flex-row  sm:flex-col">
+      <footer className="bg-[#2d2f31] mt-20 pb-6 text-gray-100 ">
+        <div className="px-8 pt-16 flex md:flex-col  lg:flex-row  sm:flex-col">
           <div className="basis-1/2 flex lg:hidden sm:flex md:flex mb-3">
             {/* button */}
-            <button className="text-white border-white border-solid border-2   h-12 min-w-40">
+            <button className="text-white border-white border-solid border-2 h-12 min-w-40">
               <div className="flex justify-start px-6">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +184,7 @@ export default function Footer() {
           </div>
         </div>
         {/* section 2 logo and copy right */}
-        <div className="px-8 py-8 flex flex-row justify-between">
+        <div className="px-8 mt-16 flex flex-row justify-between">
           <Image
             alt=""
             src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy-inverted.svg"
