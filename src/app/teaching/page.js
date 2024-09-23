@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React from "react";
+import LearningMenu from "../_components/LearningMenu/LearningMenu";
+import TeachingSlider from "../_components/TeachingSlider/TeachingSlider";
 
 const Page = () => {
   const reasons = [
@@ -93,40 +95,14 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-evenly items-center my-20 p-10 text-white text-center">
+      <div className="flex flex-col justify-evenly items-center my-20 p-10 text-center">
         <h1 className="font-bold text-5xl text-gray-800 mb-4">How to begin</h1>
-
-        <div className="text-xl font-bold text-center text-gray-500 border-b border-gray-100">
-          <ul className="flex flex-wrap -mb-px">
-            <li className="me-2">
-              <a
-                href="#"
-                className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              >
-                Plan your curriculum
-              </a>
-            </li>
-            <li className="me-2">
-              <a
-                href="#"
-                className="inline-block p-4 text-black border-b-2 border-black rounded-t-lg active text-black-500 border-black-500"
-                aria-current="page"
-              >
-                Record your video
-              </a>
-            </li>
-            <li className="me-2">
-              <a
-                href="#"
-                className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              >
-                Launch your course
-              </a>
-            </li>
-          </ul>
-        </div>
+        <LearningMenu />
       </div>
-      <div className="flex justify-between items-center my-20 text-center relative py-[26rem] px-[26rem]">
+
+      <TeachingSlider />
+
+      <div className="flex justify-between items-center my-20 text-center relative py-[10rem] px-[26rem]">
         <Image
           src="https://s.udemycdn.com/teaching/support-1-v3.jpg"
           width={460}
