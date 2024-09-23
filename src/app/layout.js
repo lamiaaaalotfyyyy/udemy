@@ -1,8 +1,7 @@
 import localFont from "next/font/local";
-import BroadSelection from "./broadSelection/page";
-import "./globals.css";
-import LandingPage from "./landingPage/page";
 import Header from "./_components/Header/Header";
+import Footer from "./_components/Footer/Footer";
+import "./globals.css"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,11 +25,9 @@ export default function RootLayout({ children }) {
       <body
         className="font-serif"
       >
-        <Header/>
-        <LandingPage/>
-        <BroadSelection/>
+        <Header />
         {children}
-        
+        <Footer />
       </body>
     </html>
   );
