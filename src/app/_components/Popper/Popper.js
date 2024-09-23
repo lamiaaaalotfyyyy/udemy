@@ -57,7 +57,7 @@ const PopperComponent = ({
           ref={setPopperElement}
           style={styles.popper}
           {...attributes.popper}
-          className="bg-white shadow-lg border max-w-[300px]"
+          className="bg-white shadow-lg border max-w-[300px] z-20"
         >
           <div className="px-6 py-4 w-full flex flex-col items-center">
             <div className="font-bold text-xl mb-4 text-center">{content}</div>

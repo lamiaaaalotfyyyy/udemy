@@ -27,10 +27,10 @@ const Page = () => {
       <div className="relative">
         <Image
           src="https://s.udemycdn.com/teaching/billboard-desktop-v4.jpg"
-          width={800}
-          height={800}
+          width={1800}
+          height={600}
           alt=""
-          className="w-full"
+          className="w-full h-[35rem] object-cover"
         />
         <div className="absolute ml-28 top-1/2 transform -translate-y-1/2 p-4 w-[23rem]">
           <h1 className="font-bold text-5xl text-gray-800 mb-4">
@@ -45,7 +45,7 @@ const Page = () => {
         </div>
       </div>
       {/*  */}
-      <div className="flex flex-col justify-center items-center my-20">
+      <div className="flex flex-col justify-center items-center my-28">
         <h1 className="font-bold text-5xl text-gray-800 mb-4">
           So many reasons to start
         </h1>
@@ -120,10 +120,54 @@ const Page = () => {
                 href="#"
                 className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
               >
-                Launch your course  
+                Launch your course
               </a>
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="flex justify-between items-center my-20 text-center relative py-[26rem] px-[26rem]">
+        <Image
+          src="https://s.udemycdn.com/teaching/support-1-v3.jpg"
+          width={460}
+          height={460}
+          alt=""
+          className="absolute -left-24"
+        />
+        <div className="flex  flex-col justify-center items-center w-[100%] px-6">
+          <h3 className="mb-6 text-4xl font-bold">
+            You won’t have to do it alone
+          </h3>
+          <p className="text-lg mb-6  ">
+            Our <strong>Instructor Support Team</strong> is here to answer your
+            questions and review your test video, while our{" "}
+            <strong>Teaching Center</strong> gives you plenty of resources to
+            help you through the process. Plus, get the support of experienced
+            instructors in our<strong>online community</strong>
+          </p>
+          <span className="text-md font-bold underline text-indigo-700 hover:text-purple-950 ml-1 decoration-purple-800 decoration-1 underline-offset-4">
+            Need more details before you start? Learn more.
+          </span>
+        </div>
+        <Image
+          src="https://s.udemycdn.com/teaching/support-2-v3.jpg"
+          width={460}
+          height={460}
+          alt=""
+          className="absolute -right-16"
+        />
+      </div>
+      <div className="bg-gray-100 font-serif">
+        <div className="flex flex-col justify-center items-center px-[2.4rem] py-[6rem] text-gray-800 text-center ">
+          <h2 className="font-bold text-5xl mb-4">
+            Become an instructor today
+          </h2>
+          <p className="text-2xl mb-1 w-[580px] text-gray-700">
+            Join one of the world’s largest online learning marketplaces.
+          </p>
+          <button className="py-4 px-6 mt-5 w-[350px] bg-gray-800 text-white text-sm font-extrabold hover:bg-gray-700">
+            Get started
+          </button>
         </div>
       </div>
     </>
