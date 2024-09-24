@@ -10,7 +10,6 @@ export default function Home() {
       <div>
         <div className="text-2xl font-bold text-center text-gray-500 flex justify-center">
           <ul className="flex w-[fit-content] border-b-2 border-gray-200">
-            {/* Plan your curriculum tab */}
             <li className="me-2">
               <div
                 className={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer ${
@@ -24,7 +23,6 @@ export default function Home() {
               </div>
             </li>
 
-            {/* Record your video tab */}
             <li className="me-2">
               <div
                 className={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer ${
@@ -38,7 +36,6 @@ export default function Home() {
               </div>
             </li>
 
-            {/* Launch your course tab */}
             <li className="me-2">
               <div
                 className={`inline-block p-4 border-b-2 rounded-t-lg hover:cursor-pointer ${

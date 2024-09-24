@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-[#2d2f31] mt-20 pb-6 text-gray-100 ">
+      <footer className="bg-[#2d2f31] pb-6 text-gray-100 ">
         <div className="px-8 pt-16 flex md:flex-col  lg:flex-row  sm:flex-col">
           <div className="basis-1/2 flex lg:hidden sm:flex md:flex mb-3">
             {/* button */}

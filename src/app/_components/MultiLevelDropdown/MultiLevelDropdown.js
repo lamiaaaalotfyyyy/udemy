@@ -96,7 +96,7 @@ const MultiLevelDropdown = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <a className="text-sm text-gray-800 hover:text-violet-600">Categories</a>
+      <a className="text-sm text-gray-600 hover:text-violet-600">Categories</a>
       {isOpen && (
         <div className="absolute flex top-14">
           <div className="absolute left-0 top-full z-10 bg-white shadow-lg">

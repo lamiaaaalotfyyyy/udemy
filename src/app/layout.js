@@ -27,8 +27,7 @@ export default function RootLayout({ children }) {
       <body className="font-serif">
         <Header />
         {children}
-        <LandingPage />
-        <BroadSelection />
+ 
         <Footer />
       </body>
     </html>
