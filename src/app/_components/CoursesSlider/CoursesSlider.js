@@ -57,43 +57,15 @@ import React from "react";
 import CourseComponentCard from "../CourseComponentCard/CourseComponentCard";
 import Slider from "react-slick";
 
-const CoursesSlider = () => {
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    swipeToSlide: true,
+const CoursesSlider = ({settings}) => {
+  const setts = {...settings,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
   return (
     <>
       <div className="slider-container">
-        <Slider {...settings}>
+        <Slider {...setts}>
           <CourseComponentCard
             image="https://img-b.udemycdn.com/course/240x135/567828_67d0.jpg"
             title="The Complete Python Bootcamp From Zero to Hero in Python"
