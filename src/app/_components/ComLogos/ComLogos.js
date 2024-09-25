@@ -54,30 +54,27 @@ export default function Com_Logos() {
   ];
 
   return (
-    <>
-      <div className="  bg-gray-100 mx-auto mt-10">
-        <div className="py-16 px-16">
-          <h1 className="text-gray-500 mb-8 max-w-full text-center font-semibold ">
-            Trusted by over 16, 000 companies and millions of learners around
-            the world
-          </h1>
-          <div>
-            <ul className="grid lg:grid-cols-8 md:grid-cols-4 sm:grid-cols-4 gap-6 justify-center">
-              {logos.map((logo, index) => (
-                <li key={index} className="flex justify-center">
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    width={logo.width}
-                    height={logo.height}
-                    loading="lazy"
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
+    <div className="bg-gray-100 mx-auto mt-10">
+      <div className="py-16 px-16">
+        <h1 className="text-gray-500 mb-8 max-w-full text-center font-semibold">
+          Trusted by over 16,000 companies and millions of learners around the
+          world
+        </h1>
+        <div>
+          <ul className="grid lg:grid-cols-8 md:grid-cols-4 sm:grid-cols-4 gap-6 justify-center">
+            {logos.map((logo, index) => (
+              <li key={index} className="flex justify-center">
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={logo.width}
+                  height={logo.height}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }
