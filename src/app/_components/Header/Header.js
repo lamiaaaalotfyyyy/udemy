@@ -61,10 +61,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-md font-sans">
       <nav
         aria-label="Global"
-        className="mx-auto flex items-center justify-between p-4 lg:px-6"
+        className="mx-auto flex items-center justify-between lg:justify-evenly p-3 lg:px-4 shadow-md z-10 relative"
       >
         <div className="flex order-2 lg:order-0">
           <Link href="/" className="-m-1.5 p-1.5">
@@ -91,7 +91,7 @@ export default function Header() {
         <div className="hidden lg:flex lg:gap-x-12 lg:order-2">
           <MultiLevelDropdown />
         </div>
-        <div className="relative w-full max-w-[45rem] hidden lg:flex lg:order-3">
+        <div className="relative w-full max-w-[40rem] hidden lg:flex lg:order-3">
           <input
             type="text"
             placeholder="Search for anything"
@@ -118,7 +118,7 @@ export default function Header() {
             trigger={
               <a
                 href="#"
-                className="text-sm text-gray-800 hover:text-violet-600"
+                className="text-sm text-gray-500 hover:text-violet-600 "
               >
                 Udemy Business
               </a>
@@ -132,7 +132,7 @@ export default function Header() {
             trigger={
               <Link
                 href="/teaching"
-                className="text-sm text-gray-800 hover:text-violet-600"
+                className="text-sm text-gray-500 hover:text-violet-600"
               >
                 Teach on Udemy
               </Link>
