@@ -4,6 +4,10 @@ import "./globals.css";
 import LandingPage from "./landingPage/page";
 import Header from "./_components/Header/Header";
 import Footer from "./_components/Footer/Footer";
+import Com_Logos from "./_components/Com_Logos/Com_Logos";
+import Top_Categories from "./_components/Top_Categories/Top_Categories";
+import Topics_Categories from "./_components/Topics_Categories/Topics_Categories";
+import Become_Instractor from "./_components/Become_Instractor/Become_Instractor";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,6 +26,21 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+<<<<<<< HEAD
+    return ( <
+        html lang = "en" >
+        <
+        body className = { `${geistSans.variable} ${geistMono.variable} antialiased` } >
+        <
+        Header > < /Header> {children} <Com_Logos></Com_Logos >
+        <
+        Top_Categories > < /Top_Categories>{" "} <
+        Topics_Categories > < /Topics_Categories>  <Become_Instractor></Become_Instractor > < Footer > < /Footer>{" "} <
+        /body>{" "} <
+        /html>
+    );
+}
+=======
   return (
     <html lang="en">
       <body className="font-sans">
@@ -33,3 +52,4 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+>>>>>>> f6c9f63fd921cb0ff24604f6f50771592fd7ae95

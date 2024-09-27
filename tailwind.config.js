@@ -1,5 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+<<<<<<< HEAD
+    content: [
+        "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+        "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    ],
+    theme: {
+        extend: {
+            colors: {
+                background: "var(--background)",
+                foreground: "var(--foreground)",
+            },
+
+        },
+    },
+    plugins: [],
+};
+=======
     darkMode: ["class"],
     content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -81,3 +99,4 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 };
+>>>>>>> f6c9f63fd921cb0ff24604f6f50771592fd7ae95
