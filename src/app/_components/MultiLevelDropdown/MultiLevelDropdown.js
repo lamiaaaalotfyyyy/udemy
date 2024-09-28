@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./MultiLevelDropdown.module.css";
+import Link from "next/link";
 
 const categories = [
   {
@@ -98,41 +99,48 @@ const MultiLevelDropdown = () => {
     >
       <a className="text-sm text-gray-600 hover:text-violet-600">Categories</a>
       {isOpen && (
-        <div className="absolute flex top-14">
+        <div className="absolute flex top-14 ">
           <div className="absolute left-0 top-full z-10 bg-white shadow-lg">
             <div className="flex px-3 py-6 border">
               <ul className="ud-unstyled-list ud-block-list w-[215px] h-[30rem]">
                 {categories.map((category) => (
-                  <li key={category.id} className="p-2">
-                    <button
-                      className={`ud-btn ud-btn-large ud-btn-ghost ud-text-sm w-full text-left ${
-                        activeCategory === category.id ? "text-violet-600" : ""
-                      }`}
-                      onMouseEnter={() => {
-                        setActiveCategory(category.id);
-                        setActiveSubcategory(null);
-                      }}
-                    >
-                      <div className="flex justify-between items-center">
-                        <span>{category.name}</span>
-                        {category.subcategories && (
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        )}
-                      </div>
-                    </button>
-                  </li>
+                  <Link
+                    key={category.id}
+                    href={`/courses/${category.name.toLowerCase()}`}
+                  >
+                    <li className="p-2">
+                      <button
+                        className={`ud-btn ud-btn-large ud-btn-ghost ud-text-sm w-full text-left ${
+                          activeCategory === category.id
+                            ? "text-violet-600"
+                            : ""
+                        }`}
+                        onMouseEnter={() => {
+                          setActiveCategory(category.id);
+                          setActiveSubcategory(null);
+                        }}
+                      >
+                        <div className="flex justify-between items-center">
+                          <span>{category.name}</span>
+                          {category.subcategories && (
+                            <svg
+                              className="h-4 w-4"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          )}
+                        </div>
+                      </button>
+                    </li>
+                  </Link>
                 ))}
               </ul>
             </div>

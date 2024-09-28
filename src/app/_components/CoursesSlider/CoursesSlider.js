@@ -1,3 +1,6 @@
+import React from "react";
+import CourseComponentCard from "../CourseComponentCard/CourseComponentCard";
+import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -53,9 +56,6 @@ function SamplePrevArrow(props) {
   );
 }
 
-import React from "react";
-import CourseComponentCard from "../CourseComponentCard/CourseComponentCard";
-import Slider from "react-slick";
 
 const CoursesSlider = ({settings}) => {
   const setts = {...settings,

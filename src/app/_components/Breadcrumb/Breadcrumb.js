@@ -18,7 +18,7 @@ import Image from "next/image";
 export function BreadcrumbDemo() {
   return (
     <Breadcrumb className="font-sans">
-      <BreadcrumbList className="relative z-10 border border-gray-50 shadow-md px-10 flex justify-between">
+      <BreadcrumbList className=" border border-gray-50 shadow-md px-10 flex justify-between">
         <div className="flex items-center justify-between">
           <BreadcrumbItem>
             <BreadcrumbLink href="/" className="font-semibold">
