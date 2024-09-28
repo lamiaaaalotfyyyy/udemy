@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import LearningMenu from "../_components/LearningMenu/LearningMenu";
-import TeachingSlider from "../_components/TeachingSlider/TeachingSlider";
-import { TeachingAccordion } from "../_components/TeachingAccordion/TeachingAccordion";
+import LearningMenu from "../../_components/LearningMenu/LearningMenu";
+import TeachingSlider from "../../_components/TeachingSlider/TeachingSlider";
+import { TeachingAccordion } from "../../_components/TeachingAccordion/TeachingAccordion";
 
 const Page = () => {
   const reasons = [
