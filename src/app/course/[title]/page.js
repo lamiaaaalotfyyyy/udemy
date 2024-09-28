@@ -8,7 +8,10 @@ import { MdOutlineSmartphone } from "react-icons/md";
 import { FaTrophy } from "react-icons/fa6";
 import { BsFileEarmark } from "react-icons/bs";
 import { RiFolderDownloadLine } from "react-icons/ri";
-import TopCompanies from "@/app/_components/TopCompanies/TopCompanies";
+import TopCompanies from '@/app/_components/TopCompanies/TopCompanies';
+import CourseContent from '@/app/_components/CourseContent/CourseContent';
+
+
 
 const page = () => {
   const course = {
