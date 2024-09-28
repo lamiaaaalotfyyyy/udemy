@@ -13,3 +13,7 @@ body {
 .slick-prev:before {
   content: "" !important;
 }
+
+.swiper-slide {
+  height: 60px !important;
+}

@@ -15,14 +15,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 
-export function BreadcrumbDemo() {
+export function BreadcrumbDemo({ category }) {
   return (
     <Breadcrumb className="font-sans">
       <BreadcrumbList className=" border border-gray-50 shadow-md px-10 flex justify-between">
         <div className="flex items-center justify-between">
           <BreadcrumbItem>
-            <BreadcrumbLink href="/" className="font-semibold">
-              Development
+            <BreadcrumbLink href="/" className="font-semibold capitalize">
+              {category}
             </BreadcrumbLink>
             <Image
               src={

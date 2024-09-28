@@ -7,13 +7,13 @@ const CourseLargeCard = () => {
     <>
       <div className="flex border-b border-gray-200">
         <div className="flex w-full">
-          <div className="w-[25%] lg:w-[50%] xl:w-[15] py-4">
+          <div className="w-[50%] lg:w-[50%] xl:w-[15] py-4">
             <Image
               src="https://img-c.udemycdn.com/course/240x135/567828_67d0.jpg"
               width={480}
               height={270}
               alt=""
-              className="border border-gray-200"
+              className="border border-gray-200 w-[100%]"
             />
           </div>
           <div className="w-full ml-4 pb-4 pt-3">
