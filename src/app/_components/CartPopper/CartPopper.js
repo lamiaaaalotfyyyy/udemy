@@ -59,7 +59,7 @@ const CartPopper = ({
           {...attributes.popper}
           className="bg-white shadow-lg border w-[300px] max-w-[300px]"
         >
-          <div className="px-6 py-4 w-full flex flex-col items-center">
+          <div className="px-6 py-4 w-full flex flex-col items-center z-10">
             <div className="text-base font-sans text-gray-500	mb-1 text-center font-semibold">
               {content}
             </div>
