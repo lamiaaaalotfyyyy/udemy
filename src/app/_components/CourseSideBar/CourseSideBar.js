@@ -11,15 +11,15 @@ const CourseSideBar = ({ courseImg, price }) => {
   return (
     <div className="">
 
-      <div className="flex flex-col bg-white shadow-2xl w-full p-4">
-        <div className="mb-4">
+      <div className="flex flex-col bg-white shadow-2xl w-full">
+        <div className="mb-4 w-full">
           <button className="relative w-full h-40 overflow-hidden rounded-lg">
             <Image
               src={courseImg}
               alt="Course Preview"
               layout="fill"
               objectFit="cover"
-              className="transition-transform duration-300 transform hover:scale-105"
+              className="transition-transform duration-300 transform hover:scale-105 w-full"
             />
             <span className="absolute inset-0 font-extrabold flex mb-3 items-end justify-center text-white bg-black bg-opacity-15 hover:bg-opacity-50 transition-opacity duration-200">
               Preview this course
@@ -28,7 +28,7 @@ const CourseSideBar = ({ courseImg, price }) => {
 
         </div>
 
-        <div className="flex-grow">
+        <div className="flex-grow px-6">
           <h2 className="text-3xl font-semibold">Subscribe to Udemy’s top courses</h2>
           <p className="text-sm text-gray-700 mb-4">
             Get this course, plus 12,000+ of our top-rated courses, with Personal Plan.
@@ -50,7 +50,7 @@ const CourseSideBar = ({ courseImg, price }) => {
         </div>
 
 
-        <div className=" mt-4 pt-4">
+        <div className=" mt-4 p-6">
           <p className="text-xl font-bold  text-gray-900"><CoursePrice price={price} /></p>
           <div className="flex mt-3 space-x-6">
             <Button className="w-full py-6 px-6 text-lg border-2 border-black basis-3/4">

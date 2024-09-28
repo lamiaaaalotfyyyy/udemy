@@ -11,15 +11,15 @@ const CourseHeader = ({ title, description, categories, rating, numberOfStudent,
                     <Breadcrumb>
                         <BreadcrumbList>
                             <BreadcrumbItem>
-                                <BreadcrumbLink className="text-indigo-400 font-sans font-bold font-extrabold" >{categories[0]}</BreadcrumbLink>
+                                <BreadcrumbLink className="text-indigo-400 font-sans font-bold " >{categories[0]}</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbLink className="text-indigo-400 font-sans font-bold font-extrabold" >{categories[1]}</BreadcrumbLink>
+                                <BreadcrumbLink className="text-indigo-400 font-sans font-bold " >{categories[1]}</BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbPage className="text-indigo-400 font-sans font-bold font-extrabold">{categories[2]}</BreadcrumbPage>
+                                <BreadcrumbPage className="text-indigo-400 font-sans font-bold ">{categories[2]}</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
