@@ -9,6 +9,7 @@ import { FaTrophy } from "react-icons/fa6";
 import { BsFileEarmark } from "react-icons/bs";
 import { RiFolderDownloadLine } from "react-icons/ri";
 import TopCompanies from '@/app/_components/TopCompanies/TopCompanies';
+import CourseContent from '@/app/_components/CourseContent/CourseContent';
 
 
 
@@ -96,7 +97,7 @@ const page = () => {
                     <div className="">
                         <TopCompanies/>
                     </div>
-
+                    <div> <CourseContent/> </div>
                 </div>
 
                 <div className="col-start-8 col-end-12 my-4">
