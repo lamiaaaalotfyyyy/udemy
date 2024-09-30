@@ -11,10 +11,15 @@ import CourseLargeCard from "@/app/_components/CourseLargeCard/CourseLargeCard";
 import TopicsSlider from "@/app/_components/TopicsSlider/TopicsSlider";
 import { usePathname } from "next/navigation";
 import InstructorSlider from "@/app/_components/InstructorSlider/InstructorSlider";
+import { useState } from "react";
 
 const Page = () => {
   const pathname = usePathname();
   const category = pathname.split("/")[2];
+  const [isFilterVisible, setIsFilterVisible] = useState(true);
+  const toggleFilter = () => {
+    setIsFilterVisible(!isFilterVisible);
+  };
 
   return (
     <>
@@ -81,7 +86,10 @@ const Page = () => {
         {/* Course Cards */}
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <div className="flex items-center border border-black font-sans hover:cursor-pointer hover:bg-gray-200 p-4">
+            <div
+              className="flex items-center border border-black font-sans hover:cursor-pointer hover:bg-gray-200 p-4"
+              onClick={toggleFilter}
+            >
               <IoFilterOutline style={{ fontSize: "18px" }} />
               <span className="font-bold ml-2">Filter</span>
             </div>
@@ -108,7 +116,11 @@ const Page = () => {
           </div>
         </div>
         <div className="flex mt-2 mb-12">
-          <div className="w-[25%] hidden lg:block pt-4">
+          <div
+            className={`w-[25%] ${
+              isFilterVisible ? "lg:block" : "lg:hidden"
+            } hidden pt-4`}
+          >
             <FilterAccordion />
           </div>
           <div className="w-full lg:ml-6">
