@@ -1,9 +1,11 @@
 import InstructorHeader from "./InstructorHeader/InstructorHeader";
+import SideNav from "./InstructorSidenav/SideNav";
 
 export default function Home() {
   return (
     <>
       <InstructorHeader />
+      <SideNav/>
       <div className="container mx-20">
         <h1 className="font-serif text-4xl font-bold text-gray-700">Courses</h1>
         <div className="flex justify-between items-center">
