@@ -30,8 +30,10 @@ const CourseHeader = ({ title, description, categories, rating, numberOfStudent,
                 <p className='text-2xl	 mt-7 font-sans ' >{description}</p>
 
                 <div className="flex items-center mt-5 ">
-                    <div className="bg-amber-50 text-yellow-600 p-1 mr-4">  Best Saller </div>
-                    <span className="text-yellow-500 mr-2 font-sans font-extrabold">{rating}</span>
+                <span className="bg-[#ECEB98] px-3 py  font-semibold text-[#3D3C0A] px-1 mr-4 text-sm">
+                    Bestseller
+                </span>
+                <span className="text-yellow-500 mr-2 font-sans font-extrabold">{rating}</span>
                     <Rating ratingValue={rating} readOnly={true} />
                     <a className="mr-3 ml-4 text-indigo-400 font-semibold underline"> ({numberOfRates} ratings) </a>
                     <p className='font-medium	'>{numberOfStudent} students</p>

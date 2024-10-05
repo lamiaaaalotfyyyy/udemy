@@ -12,9 +12,9 @@ const Rating = ({ totalStars = 5, ratingValue = 4.8, readOnly = false }) => {
   };
 
   return (
-    <div className="flex space-x-1">
+    <div className="flex space-x-1 mt-1">
       {Array.from({ length: totalStars }, (_, index) => (
-        <Star
+        <Star 
           key={index}
           filled={index + 1 <= Math.floor(rating)} // Full star
           half={index + 1 > Math.floor(rating) && index < rating} // Half star
@@ -32,16 +32,16 @@ const Star = ({ filled, half, onClick, readOnly }) => {
     <svg
       onClick={!readOnly ? onClick : undefined}
       xmlns="http://www.w3.org/2000/svg"
-      fill={filled ? "yellow" : half ? "url(#halfGradient)" : "none"}
+      fill={filled ? "#B4690E" : half ? "url(#halfGradient)" : "none"}
       viewBox="0 0 24 24"
       stroke="currentColor"
-      className={`w-4 h-4 ${!readOnly ? "cursor-pointer" : ""} text-yellow-400`} // Smaller size
+      className={`w-4 h-4 ${!readOnly ? "cursor-pointer" : ""} text-[#B4690E]`} // Smaller size
     >
       {/* Half star gradient for fractional stars */}
       {half && (
         <defs>
           <linearGradient id="halfGradient">
-            <stop offset="50%" stopColor="gold" />
+            <stop offset="50%" stopColor="#B4690E" />
             <stop offset="50%" stopColor="transparent" />
           </linearGradient>
         </defs>

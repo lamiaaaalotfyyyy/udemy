@@ -1,13 +1,22 @@
 "use client"
 import { AiOutlineDown } from 'react-icons/ai';
 import React, { useState } from 'react';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible'; // Import ShadCN's Collapsible
 
 const CourseContent = () => {
+    
+    
     const [openSection, setOpenSection] = useState(null);
+    const [showAllSections, setShowAllSections] = useState(false); // Toggle to show more/less sections
 
     const toggleSection = (index) => {
         setOpenSection(openSection === index ? null : index);
     };
+
+    const toggleShowAllSections = () => {
+        setShowAllSections(!showAllSections); // Toggle between showing limited sections and all sections
+    };
+
 
     const sections = [
         {
@@ -21,11 +30,14 @@ const CourseContent = () => {
         },
         {
             title: "Tailwind Basics",
-            duration: "1h 30m",
+            duration: "3h ",
             lectures: [
                 { title: "Utility-first CSS", duration: "20m" },
                 { title: "Responsive Design", duration: "30m" },
-                { title: "Customizing Tailwind", duration: "40m" }
+                { title: "Customizing Tailwind", duration: "40m" },
+                { title: "Utility-first CSS", duration: "20m" },
+                { title: "Responsive Design", duration: "30m" },
+                { title: "Customizing Tailwind", duration: "40m" },
             ],
         },
         {
@@ -57,11 +69,14 @@ const CourseContent = () => {
         },
         {
             title: "Advanced Tailwind Techniques",
-            duration: "1h 15m",
+            duration: "2h 30m",
             lectures: [
                 { title: "Using Plugins", duration: "15m" },
                 { title: "Optimizing for Production", duration: "30m" },
-                { title: "Building Custom Components", duration: "30m" }
+                { title: "Building Custom Components", duration: "30m" },
+                { title: "Using Plugins", duration: "15m" },
+                { title: "Optimizing for Production", duration: "30m" },
+                { title: "Building Custom Components", duration: "30m" },
             ],
         },
         {
@@ -120,31 +135,43 @@ const CourseContent = () => {
         },
     ];
 
+    // Determine the number of sections to display initially
+    const displayedSections = showAllSections ? sections : sections.slice(0, 3); // Show first 3 sections by default
+
     return (
-        <div className="max-w-7xl mx-auto p-6 bg-white shadow-md rounded-md">
+        <div className="max-w-7xl mx-auto p-6 bg-white  rounded-md">
             <h2 className="text-2xl font-bold text-slate-800">Course content</h2>
             <p className="text-slate-600 mt-2 mb-4">
                 {sections.length} sections • {sections.reduce((total, section) => total + section.lectures.length, 0)} lectures • 3h 15m total length
             </p>
 
-            {sections.map((section, index) => (
-                <div key={section.title} className="mb-4">
+            {/* Render the displayed sections */}
+            {displayedSections.map((section, index) => (
+                <Collapsible key={section.title} open={openSection === index}>
                     {/* Section Header */}
-                    <button
-                        onClick={() => toggleSection(index)}
-                        className="flex justify-between items-center w-full text-left p-4 bg-gray-100 rounded-lg"
-                    >
-                        <div>
-                            <h3 className="font-semibold text-slate-800">{section.title}</h3>
-                            <p className="text-slate-500 text-sm">{section.duration}</p>
-                        </div>
-                        <AiOutlineDown size={24} color="black"
-                            className={`h-5 w-5 transform ${openSection === index ? 'rotate-180' : ''}`}
-                        />
-                    </button>
+                    <CollapsibleTrigger asChild className="border">
+                        <button
+                            onClick={() => toggleSection(index)}
+                            className="flex justify-between border-1 items-center w-full text-left p-4 bg-[#F7F9FA] rounded-lg"
+                        >
+                            <div className="flex items-center ">
+                                <AiOutlineDown
+                                    size={-3}
+                                    color="black"
+                                    className={`h-5 w-5 transform mr-2 ${openSection === index ? 'rotate-180' : ''}`}
+                                />
+                                <h3 className="font-semibold text-slate-800">{section.title}</h3>
+                            </div>
+
+                            <div> 
+                                <p className="text-slate-500 text-sm">{section.lectures.length } lectures • {section.duration}</p>
+
+                            </div>
+                        </button>
+                    </CollapsibleTrigger>
 
                     {/* Section Content */}
-                    {openSection === index && (
+                    <CollapsibleContent>
                         <ul className="mt-3 pl-5 list-disc">
                             {section.lectures.map((lecture) => (
                                 <li key={lecture.title} className="flex justify-between py-2">
@@ -153,11 +180,23 @@ const CourseContent = () => {
                                 </li>
                             ))}
                         </ul>
-                    )}
-                </div>
+                    </CollapsibleContent>
+                </Collapsible>
             ))}
+
+            {/* Show More / Show Less Button */}
+            <div className="mt-4">
+                {sections.length > 5 && (
+                    <button
+                        onClick={toggleShowAllSections}
+                        className="px-4 w-full mb-9 py-4 border shadow-md	 bg-[#FFFFFF] hover:bg-[#E3E7EA]"
+                        hidden = {showAllSections}
+                    >
+                        {`${sections.length - 5} more sections`}
+                    </button>
+                )}
+        </div>
         </div>
     );
 };
-
 export default CourseContent;
