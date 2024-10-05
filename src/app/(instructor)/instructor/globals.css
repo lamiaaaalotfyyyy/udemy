@@ -17,3 +17,19 @@ body {
 .swiper-slide {
   height: 60px !important;
 }
+
+.sidenav li div::after {
+  transition: opacity 200ms ease-in-out;
+}
+
+.sidenav:hover li div::after {
+  opacity: 0;
+}
+
+.sidenav:hover li span::after {
+  opacity: 0;
+}
+
+.sidenav li span::after {
+  transition: opacity 200ms ease-in-out;
+}

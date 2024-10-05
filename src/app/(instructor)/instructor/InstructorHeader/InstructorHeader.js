@@ -19,89 +19,69 @@ import { MdOutlineOpenInNew } from "react-icons/md";
 const InstructorHeader = () => {
   return (
     <div className="flex justify-start items-center flex-row-reverse gap-8 mx-10 my-6">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <HoverCard>
+        <HoverCardTrigger asChild>
           <Avatar className="hover:cursor-pointer w-[35px] h-[35px]">
             <AvatarImage />
             <AvatarFallback className="bg-gray-900 text-white font-bold">
               KA
             </AvatarFallback>
           </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-64 mr-8 mt-4 bg-white border border-gray-200 text-gray-700">
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <div className="flex items-center py-4 group">
-                <Avatar className="hover:cursor-pointer w-[60px] h-[60px]">
-                  <AvatarImage />
-                  <AvatarFallback className="bg-gray-900 text-white text-2xl font-bold">
-                    KA
-                  </AvatarFallback>
-                </Avatar>
-                <div className="ml-4">
-                  <h1 className="text-sm font-bold text-gray-900 group-hover:text-violet-800">
-                    Karim Abdelkareen
-                  </h1>
-                  <p className="text-xs text-gray-500">alkar33m@gmail.com</p>
-                </div>
-              </div>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <hr />
-          <DropdownMenuItem>
-            <h1 className="p-2 hover:text-violet-700">Student</h1>
-          </DropdownMenuItem>
-          <hr />
-          <DropdownMenuItem>
-            <h1 className="p-2 hover:text-violet-700">Notification</h1>
-          </DropdownMenuItem>
-          <hr />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <h1 className="p-2 hover:text-violet-700 pb-0">
-                Account settings
+        </HoverCardTrigger>
+        <HoverCardContent className="w-72 bg-white mt-4 mr-8">
+          <div className="flex items-center py-4 group">
+            <Avatar className="hover:cursor-pointer w-[60px] h-[60px]">
+              <AvatarImage />
+              <AvatarFallback className="bg-gray-900 text-white text-2xl font-bold">
+                KA
+              </AvatarFallback>
+            </Avatar>
+
+            <div className="ml-4">
+              <h1 className="text-sm font-bold text-gray-900 group-hover:text-violet-800">
+                Karim Abdelkareen
               </h1>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <h1 className="p-2 hover:text-violet-700">
-                Payout & tax settings
-              </h1>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <hr />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <h1 className="p-2 hover:text-violet-700 pb-0">Public Profile</h1>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <h1 className="p-2 hover:text-violet-700">Edit Profile</h1>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <hr />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <h1 className="p-2 hover:text-violet-700 pb-0">Help & Support</h1>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <h1 className="p-2 hover:text-violet-700">Log out</h1>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <hr />
-          <DropdownMenuItem>
-            <div className="flex w-full justify-between items-start py-4 group">
-              <div className="flex flex-col justify-between">
-                <h1 className="text-lg font-bold text-gray-900 group-hover:text-violet-800">
-                  Udemy Business
-                </h1>
-                <p className="text-xs text-gray-500">
-                  Bring learning to your company
-                </p>
-              </div>
-              <MdOutlineOpenInNew className="text-2xl" />
+              <p className="text-xs text-gray-500">alkar33m@gmail.com</p>
             </div>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </div>
+
+          <hr />
+          <h1 className="p-2 hover:text-violet-700">Student</h1>
+          <hr />
+          <h1 className="p-2 hover:text-violet-700">Notification</h1>
+          <hr />
+
+          <h1 className="p-2 hover:text-violet-700 pb-0">Account settings</h1>
+
+          <h1 className="p-2 hover:text-violet-700">Payout & tax settings</h1>
+
+          <hr />
+
+          <h1 className="p-2 hover:text-violet-700 pb-0">Public Profile</h1>
+
+          <h1 className="p-2 hover:text-violet-700">Edit Profile</h1>
+
+          <hr />
+
+          <h1 className="p-2 hover:text-violet-700 pb-0">Help & Support</h1>
+
+          <h1 className="p-2 hover:text-violet-700">Log out</h1>
+
+          <hr />
+          <div className="flex w-full justify-between items-start py-4 group">
+            <div className="flex flex-col justify-between">
+              <h1 className="text-lg font-bold text-gray-900 group-hover:text-violet-800">
+                Udemy Business
+              </h1>
+              <p className="text-xs text-gray-500">
+                Bring learning to your company
+              </p>
+            </div>
+            <MdOutlineOpenInNew className="text-2xl" />
+          </div>
+        </HoverCardContent>
+      </HoverCard>
+
       {/*  */}
       <HoverCard>
         <HoverCardTrigger asChild>
