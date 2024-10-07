@@ -35,10 +35,12 @@ const SideNav = () => {
           </div>
           <li
             className={`p-4 w-full hover:bg-[#3e4143] ${
-              path === "/instructor" ? "shadow-[4px_0_0_0_#a435f0_inset]" : ""
+              path.split("/")[2] === "course"
+                ? "shadow-[4px_0_0_0_#a435f0_inset]"
+                : ""
             }`}
           >
-            <Link href="/instructor" className="flex items-center">
+            <Link href="/instructor/course" className="flex items-center">
               <LuMonitorPlay className="text-white text-2xl flex-shrink-0" />
               <span className="ml-4 font-bold text-white relative after:content-[''] after:block after:absolute after:top-[0rem] after:left-[0rem] after:h-[2.5rem] after:w-[28.1rem] after:bg-[#2d2f31] after:opacity-100 flex-1">
                 Courses
@@ -47,12 +49,15 @@ const SideNav = () => {
           </li>
           <li
             className={`p-4 w-full hover:bg-[#3e4143] ${
-              path === "/communication"
+              path.split("/")[2] === "communication"
                 ? "shadow-[4px_0_0_0_#a435f0_inset]"
                 : ""
             }`}
           >
-            <Link href="/instructor" className="flex items-center">
+            <Link
+              href="/instructor/communication/qa"
+              className="flex items-center"
+            >
               <TbMessage className="text-white text-2xl flex-shrink-0" />
               <span className="ml-4 font-bold text-white relative after:content-[''] after:block after:absolute after:top-[0rem] after:left-[0rem] after:h-[2.5rem] after:w-[28.1rem] after:bg-[#2d2f31] after:opacity-100 flex-1">
                 Communication
@@ -97,6 +102,45 @@ const SideNav = () => {
           </li>
         </ul>
       </div>
+      {path.split("/")[2] == "communication" ? (
+        <div className="absolute w-72 top-0 left-0 h-screen text-gray-800 bg-gray-100">
+          <ul className="ml-24 my-10">
+            <li
+              className={`my-5 ${
+                path.split("/")[3] == "qa" ? "font-bold" : ""
+              }`}
+            >
+              <Link href="qa">Q&A</Link>
+            </li>
+            <li
+              className={`my-5 ${
+                path.split("/")[3] == "messages" ? "font-bold" : ""
+              }`}
+            >
+              {" "}
+              <Link href="messages">Messages</Link>
+            </li>
+            <li
+              className={`my-5 ${
+                path.split("/")[3] == "assignmetns" ? "font-bold" : ""
+              }`}
+            >
+              {" "}
+              <Link href="assignmetns">Assignments</Link>
+            </li>
+            <li
+              className={`my-5 ${
+                path.split("/")[3] == "announcements" ? "font-bold" : ""
+              }`}
+            >
+              {" "}
+              <Link href="announcements">Announcements</Link>
+            </li>
+          </ul>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };
