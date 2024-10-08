@@ -1,6 +1,5 @@
 import "./globals.css";
-import { Toaster } from "sonner";
-import InstructorHeader from "./InstructorHeader/InstructorHeader";
+import { Toaster } from "@/components/ui/toaster"
 
 
 export const metadata = {
