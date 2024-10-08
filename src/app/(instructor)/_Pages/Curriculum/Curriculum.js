@@ -9,6 +9,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Curriculum = () => {
   const [isFormVisible, setFormVisible] = useState(false);
+  const [isCurriculumVisible, setCurriculumVisible] = useState(false);
   const [sections, setSections] = useState([
     {
       title: "Section 1",
@@ -31,9 +32,15 @@ const Curriculum = () => {
   const toggleFormVisibility = () => {
     setFormVisible((prev) => !prev);
   };
+  const toggleCurriculumVisibility = () => {
+    setCurriculumVisible((prev) => !prev);
+  };
 
   const handleCancel = () => {
     setFormVisible(false);
+  };
+  const handleCurriculumCancel = () => {
+    setCurriculumVisible(false);
   };
 
   const handleAddSection = (title, objective) => {
@@ -127,7 +134,7 @@ const Curriculum = () => {
           </p>
         </div>
 
-        <DragDropContext onDragEnd={onDragEnd} >
+        <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable" type="SECTION">
             {(provided) => (
               <div
