@@ -8,10 +8,10 @@ function ReuseableInstructorCard({ image, name, des  }) {
                 <div className="w-full col-span-1 flex" >
                     <Image
                         src={image}
-                        width={64}
-                        height={64}
+                        width={200}
+                        height={200}
                         alt="Instructor image"
-                        className=" w-[12rem]  m-auto"
+                        className="m-auto"
                     />
                 </div>
                 <div className="w-full col-span-1 p-4 flex flex-col justify-center" >
