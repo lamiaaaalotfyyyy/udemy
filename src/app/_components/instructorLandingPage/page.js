@@ -43,38 +43,74 @@ function InstructorLandingPage() {
             </div>
 
             {/* Course Card */}
-            <div className='flex border border-black mt-6 w-full '>
-                <Image src="https://s.udemycdn.com/course/200_H/placeholder.jpg" width="130" height="130" alt='' />
-                <div className='relative w-full '>
-                    <h1 className='font-bold text-lg mx-6 mt-4'>Title of Test Course</h1>
-                    <div className='flex gap-4 absolute bottom-5 left-7'>
-                        <p className='text-xs font-bold'>DRAFT</p>
-                        <p className='text-xs'>Public</p>
+            <div className='flex border border-black mt-6 w-full grid grid-cols-8'>
+                <div>
+                    <Image src="https://s.udemycdn.com/course/200_H/placeholder.jpg" width="130" height="130" alt='' />
+                </div>
+                <div className='relative flex group hover:cursor-pointer col-span-7'>
+                    <h1 className='invisible group-hover:visible group-hover:opacity-100 absolute font-bold text-lg text-center m-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Edit/Manage Course</h1>
+                    <div className='group-hover:opacity-5 w-full flex '>
+                        <div className='w-3/4 flex-col' >
+                            <h1 className='font-bold text-lg mt-4'>Learn JavaScript from Zero to Hero</h1>
+                            <div className='flex gap-4 mt-12'>
+                                <p className='text-xs font-bold'>DRAFT</p>
+                                <p className='text-xs'>Public</p>
+                            </div>
+                        </div>
+                        <div className='m-auto flex justify-center w-full'>
+                            <h1 className='font-bold text-lg'>Finish your course</h1>
+                            <div className="mt-2 ml-6 bg-gray-200 w-1/2 h-3">
+                                <div className="bg-[#a435f0] h-full" style={{ width: `${progress}%` }} />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className='m-auto flex w-full justify-center' >
-                    <h1 className='font-bold text-lg'>Finish your course</h1>
-                    <div className="mt-2 ml-6 bg-gray-200 w-1/2 h-3 ">
-                        <div className="bg-[#a435f0] h-full" style={{ width: `${progress}%` }} />
-                    </div>
-                </div>
-
             </div>
-
-            {/* Another Course Card */}
-            <div className='flex border border-black mt-6 w-full'>
-                <Image src="https://s.udemycdn.com/course/200_H/placeholder.jpg" width="130" height="130" alt='' />
-                <div className='relative w-full'>
-                    <h1 className='font-bold text-lg mx-6  mt-4'>Learn JavaScript from Zero to Hero</h1>
-                    <div className='flex gap-4 absolute bottom-5 left-7'>
-                        <p className='text-xs font-bold'>DRAFT</p>
-                        <p className='text-xs'>Public</p>
+            {/* Course Card */}
+            <div className='flex border border-black mt-6 w-full grid grid-cols-8'>
+                <div>
+                    <Image src="https://s.udemycdn.com/course/200_H/placeholder.jpg" width="130" height="130" alt='' />
+                </div>
+                <div className='relative flex group hover:cursor-pointer col-span-7'>
+                    <h1 className='invisible group-hover:visible group-hover:opacity-100 absolute font-bold text-lg text-center m-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Edit/Manage Course</h1>
+                    <div className='group-hover:opacity-5 w-full flex '>
+                        <div className='w-3/4 flex-col' >
+                            <h1 className='font-bold text-lg mt-4'>Learn JavaScript from Zero to Hero</h1>
+                            <div className='flex gap-4 mt-12'>
+                                <p className='text-xs font-bold'>DRAFT</p>
+                                <p className='text-xs'>Public</p>
+                            </div>
+                        </div>
+                        <div className='m-auto flex justify-center w-full'>
+                            <h1 className='font-bold text-lg'>Finish your course</h1>
+                            <div className="mt-2 ml-6 bg-gray-200 w-1/2 h-3">
+                                <div className="bg-[#a435f0] h-full" style={{ width: `${progress}%` }} />
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className='m-auto flex w-full justify-center' >
-                    <h1 className='font-bold text-lg'>Finish your course</h1>
-                    <div className="mt-2 ml-6 bg-gray-200 w-1/2 h-3 ">
-                        <div className="bg-[#a435f0] h-full" style={{ width: `${progress}%` }} />
+            </div>
+            {/* Another Course Card */}
+            <div className='flex border border-black mt-6 w-full grid grid-cols-8'>
+                <div>
+                    <Image src="https://s.udemycdn.com/course/200_H/placeholder.jpg" width="130" height="130" alt='' />
+                </div>
+                <div className='relative flex group hover:cursor-pointer col-span-7'>
+                    <h1 className='invisible group-hover:visible group-hover:opacity-100 absolute font-bold text-lg text-center m-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Edit/Manage Course</h1>
+                    <div className='group-hover:opacity-5 w-full flex '>
+                        <div className='w-3/4 flex-col' >
+                            <h1 className='font-bold text-lg mt-4'>Learn JavaScript from Zero to Hero</h1>
+                            <div className='flex gap-4 mt-12'>
+                                <p className='text-xs font-bold'>DRAFT</p>
+                                <p className='text-xs'>Public</p>
+                            </div>
+                        </div>
+                        <div className='m-auto flex justify-center w-full'>
+                            <h1 className='font-bold text-lg'>Finish your course</h1>
+                            <div className="mt-2 ml-6 bg-gray-200 w-1/2 h-3">
+                                <div className="bg-[#a435f0] h-full" style={{ width: `${progress}%` }} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
