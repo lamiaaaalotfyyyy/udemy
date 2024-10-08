@@ -3,8 +3,7 @@ import CoursesSlider from "../_components/CoursesSlider/CoursesSlider";
 import React from "react";
 
 function LandingPageSection5() {
-    const settings = {
-        dots: true,
+  const settings = {
     infinite: false,
     speed: 500,
     slidesToShow: 5,
@@ -17,48 +16,48 @@ function LandingPageSection5() {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
-    return (
-        <>
-            <div className="mx-20 mt-20">
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-700" >Learners are viewing
-                    </h1>
-                </div>
+  return (
+    <>
+      <div className="mx-10 mt-20">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-700">
+            Learners are viewing
+          </h1>
+        </div>
+      </div>
+      <div className="mx-auto py-8">
+        <div>
+          <div className="p-6 text-black">
+            <div>
+              <div className="">
+                <CoursesSlider settings={settings} />
+              </div>
             </div>
-
-            <div className="container mx-auto p-8">
-                <div>
-                    <div className="p-6 text-black">
-                            <div>
-                                <div className="" >
-                                    <CoursesSlider settings={settings} />
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default LandingPageSection5;
