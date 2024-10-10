@@ -1,77 +1,119 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./MultiLevelDropdown.module.css";
 
-const categories = [
-  {
-    id: 288,
-    name: "Development",
-    subcategories: [
-      {
-        id: 8,
-        name: "Web Development",
-        popularTopics: [
-          "React",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "Angular",
-          "Vue.js",
-          "Bootstrap",
-        ],
-      },
-      {
-        id: 558,
-        name: "Data Science",
-        popularTopics: [
-          "Python",
-          "Machine Learning",
-          "Data Analysis",
-          "Deep Learning",
-          "Statistics",
-        ],
-      },
-      {
-        id: 10,
-        name: "Mobile Development",
-        popularTopics: ["Flutter", "React Native", "Swift", "Kotlin", "Ionic"],
-      },
-    ],
-  },
-  {
-    id: 268,
-    name: "Business",
-    subcategories: [
-      {
-        id: 12,
-        name: "Entrepreneurship",
-        popularTopics: [
-          "Business Strategy",
-          "Freelancing",
-          "Startup",
-          "Business Plan",
-        ],
-      },
-      {
-        id: 13,
-        name: "Management",
-        popularTopics: ["Leadership", "Time Management", "Productivity"],
-      },
-    ],
-  },
-  { id: 328, name: "Finance & Accounting" },
-];
+// const categories = [
+//   {
+//     id: 288,
+//     name: "Development",
+//     subcategories: [
+//       {
+//         id: 8,
+//         name: "Web Development",
+//         popularTopics: [
+//           "React",
+//           "JavaScript",
+//           "HTML",
+//           "CSS",
+//           "Angular",
+//           "Vue.js",
+//           "Bootstrap",
+//         ],
+//       },
+//       {
+//         id: 558,
+//         name: "Data Science",
+//         popularTopics: [
+//           "Python",
+//           "Machine Learning",
+//           "Data Analysis",
+//           "Deep Learning",
+//           "Statistics",
+//         ],
+//       },
+//       {
+//         id: 10,
+//         name: "Mobile Development",
+//         popularTopics: ["Flutter", "React Native", "Swift", "Kotlin", "Ionic"],
+//       },
+//     ],
+//   },
+//   {
+//     id: 268,
+//     name: "Business",
+//     subcategories: [
+//       {
+//         id: 12,
+//         name: "Entrepreneurship",
+//         popularTopics: [
+//           "Business Strategy",
+//           "Freelancing",
+//           "Startup",
+//           "Business Plan",
+//         ],
+//       },
+//       {
+//         id: 13,
+//         name: "Management",
+//         popularTopics: ["Leadership", "Time Management", "Productivity"],
+//       },
+//     ],
+//   },
+//   { id: 328, name: "Finance & Accounting" },
+// ];
+async function fetchData() {
+  try {
+    const res = await fetch('https://udemy-eosin-eight.vercel.app/category');
+    const data = await res.json();
+    console.log(data);
+    
+
+    // // Structure the data in the desired format
+    // const categories = data.result.map(category => ({
+    //   id: category._id,
+    //   name: category.name,
+    //   subcategories: category.subcategories.map(subcategory => ({
+    //     id: subcategory._id,
+    //     name: subcategory.name,
+    //     popularTopics: subcategory.topics.map(topic => topic.name),
+    //   })),
+    // }));
+
+    return categories.result;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
+
+const categories = fetchData();
 
 const MultiLevelDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]); // State to store categories
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeSubcategory, setActiveSubcategory] = useState(null);
   const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
 
+
+  // Fetch categories when component mounts
+  useEffect(() => {
+    const getData = async () => {
+      const categoriesData = await fetchData();
+      setCategories(categoriesData);
+    };
+
+    getData(); // Call fetch function inside useEffect
+  }, []);
+
+  console.log(categories);
+  
+
   const handleMouseEnter = () => {
     clearTimeout(timeoutRef.current);
     setIsOpen(true);
   };
+
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
