@@ -20,7 +20,7 @@ function InstructorSection2LandingPage() {
 
             <div className="mx-52 pb-20 my-20 flex gap-10 justify-center">
 
-                <div className="flex justify-center items-center flex-col ">
+                <div className="flex justify-center items-center flex-col">
                     <a
                         href="test-video/"
                         target="_blank"
