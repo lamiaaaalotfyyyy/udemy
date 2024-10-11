@@ -1,22 +1,25 @@
-"use client"
 import React, { useState } from "react";
-import { FaPlus, FaPen, FaTrash } from "react-icons/fa";
 
-const AddLectureForm = ({ sectionIndex, handleAddItem, setLectureFormVisible }) => {
+const NewLectureForm = ({
+  sectionIndex,
+  setLectureFormVisible,
+  handleAddItem,
+}) => {
   const [newLectureTitle, setNewLectureTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleAddLecture = () => {
-    if (newLectureTitle.length === 0) {
+  const validateAndAddLecture = () => {
+    if (newLectureTitle.trim().length == 0) {
       setErrorMessage("This field may not be blank.");
       return;
     }
-    if (newLectureTitle.length < 3) {
-      setErrorMessage("Titles must have minimum 3 characters.");
+    if (newLectureTitle.trim().length < 3) {
+      setErrorMessage("Title must be at least 3 characters long.");
       return;
     }
-    handleAddItem(sectionIndex, "lecture");
-    setLectureFormVisible(null);
+    setErrorMessage(""); // Clear error message if valid
+    handleAddItem(sectionIndex, "lecture", newLectureTitle);
+    setLectureFormVisible(null); // Close the form after adding
   };
 
   return (
@@ -30,7 +33,7 @@ const AddLectureForm = ({ sectionIndex, handleAddItem, setLectureFormVisible }) 
             value={newLectureTitle}
             onChange={(e) => setNewLectureTitle(e.target.value)}
             maxLength={80}
-            className={`border border-black pl-4 pr-8 py-1 w-full outline-none ${
+            className={`border pl-4 pr-8 py-1 w-full outline-none ${
               errorMessage ? "border-2 border-orange-300" : "border-black"
             }`}
           />
@@ -38,7 +41,7 @@ const AddLectureForm = ({ sectionIndex, handleAddItem, setLectureFormVisible }) 
             {80 - newLectureTitle.length}
           </span>
         </div>
-        {newLectureTitle.length < 3 && (
+        {errorMessage && (
           <p className="text-red-900 text-xs mt-2">{errorMessage}</p>
         )}
         <div className="flex justify-end flex-1 mt-10">
@@ -49,7 +52,7 @@ const AddLectureForm = ({ sectionIndex, handleAddItem, setLectureFormVisible }) 
             Cancel
           </button>
           <button
-            onClick={handleAddLecture}
+            onClick={validateAndAddLecture}
             className="bg-black font-medium text-white px-3 py-1"
           >
             Add Lecture
@@ -60,4 +63,4 @@ const AddLectureForm = ({ sectionIndex, handleAddItem, setLectureFormVisible }) 
   );
 };
 
-export default AddLectureForm;
+export default NewLectureForm;

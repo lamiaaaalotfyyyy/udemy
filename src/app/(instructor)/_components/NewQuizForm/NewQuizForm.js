@@ -1,30 +1,42 @@
-"use client"
 import React, { useState } from "react";
-import RichText3 from "../../_components/RichText3/RichText";
+import RichText3 from "../RichText3/RichText";
 
-const NewQuizForm = ({ sectionIndex, handleAddItem, setQuizFormVisible }) => {
+const NewQuizForm = ({ sectionIndex, setQuizFormVisible, handleAddItem }) => {
   const [newQuizTitle, setNewQuizTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [newQuizContent, setNewQuizContent] = useState("");
 
-  const handleAddQuiz = () => {
-    if (newQuizTitle.length === 0) {
+  const validateAndAddQuiz = () => {
+    // Input validation
+    if (newQuizTitle.trim().length === 0) {
       setErrorMessage("This field may not be blank.");
       return;
     }
-    if (newQuizTitle.length < 3) {
-      setErrorMessage("Titles must have minimum 3 characters.");
+    if (newQuizTitle.trim().length < 3) {
+      setErrorMessage("Title must be at least 3 characters long.");
       return;
     }
-    handleAddItem(sectionIndex, "quiz");
+    setErrorMessage(""); // Clear error message if valid
+
+    // Add the quiz
+    handleAddItem(sectionIndex, "quiz", newQuizTitle, newQuizContent);
+    console.log("Description:", newQuizContent); // Log the content for debugging
+
+    // Reset fields and close the form
+    setNewQuizTitle("");
+    setNewQuizContent("");
     setQuizFormVisible(null);
   };
 
   return (
     <div className="flex p-4 border border-black mr-2 bg-white">
-      <p>New Quiz:</p>
+      <label htmlFor="quiz-title" className="font-medium">
+        New Quiz:
+      </label>
       <div className="flex-1 ml-3">
         <div className="relative">
           <input
+            id="quiz-title"
             type="text"
             placeholder="Enter title"
             value={newQuizTitle}
@@ -38,10 +50,16 @@ const NewQuizForm = ({ sectionIndex, handleAddItem, setQuizFormVisible }) => {
             {80 - newQuizTitle.length}
           </span>
         </div>
-        {newQuizTitle.length < 3 && (
+        {errorMessage && (
           <p className="text-red-900 text-xs mt-2">{errorMessage}</p>
         )}
-        <RichText3 />
+        <div className="mt-3">
+          <RichText3
+            content={newQuizContent}
+            onChange={(newContent) => setNewQuizContent(newContent)}
+            placeholder="Enter quiz description..." // Optional placeholder for clarity
+          />
+        </div>
         <div className="flex justify-end flex-1 mt-10">
           <button
             onClick={() => setQuizFormVisible(null)}
@@ -50,7 +68,7 @@ const NewQuizForm = ({ sectionIndex, handleAddItem, setQuizFormVisible }) => {
             Cancel
           </button>
           <button
-            onClick={handleAddQuiz}
+            onClick={validateAndAddQuiz}
             className="bg-black font-medium text-white px-3 py-1"
           >
             Add Quiz

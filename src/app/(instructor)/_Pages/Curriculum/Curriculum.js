@@ -1,27 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import { MdOutlineInsertDriveFile } from "react-icons/md";
-import { FaPen, FaTrash } from "react-icons/fa";
-import { IoIosMenu, IoIosCheckmarkCircle } from "react-icons/io";
+import { FaBook, FaPen, FaQuestion, FaTrash } from "react-icons/fa";
+import { IoIosMenu, IoIosCheckmarkCircle, IoMdClose } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import ExpandedSection from "../../_components/ExpandedSection/ExpandedSection";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import RichText3 from "../../_components/RichText3/RichText";
 import { GoQuestion } from "react-icons/go";
+import NewSectionForm from "../../_components/NewSectionForm/NewSectionForm";
+import EditItemForm from "../../_components/EditItemForm/EditItemForm";
+import NewLectureForm from "../../_components/NewLectureForm/NewLectureForm";
+import NewQuizForm from "../../_components/NewQuizForm/NewQuizForm";
+import AddContentForm from "../../_components/AddContentForm/AddContentForm";
 
 const Curriculum = () => {
   const [isFormVisible, setFormVisible] = useState(false);
+  const [addContent, setAddContent] = useState(null);
   const [visibleSectionIndex, setVisibleSectionIndex] = useState(null);
   const [lectureFormVisible, setLectureFormVisible] = useState(null);
   const [quizFormVisible, setQuizFormVisible] = useState(null);
-  const [newLectureTitle, setNewLectureTitle] = useState("");
-  const [newQuizTitle, setNewQuizTitle] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [editSectionIndex, setEditSectionIndex] = useState(null);
-  const [editedSectionTitle, setEditedSectionTitle] = useState("");
   const [editLectureIndex, setEditLectureIndex] = useState(null);
   const [editLectureTitle, setEditedLectureTitle] = useState("");
-  const [editLectureContent, setEditLectureContent] = useState("");
+  const [editQuizDescription, setEditQuizDescription] = useState("");
   const [sections, setSections] = useState([
     {
       title: "Section 1",
@@ -32,7 +33,7 @@ const Curriculum = () => {
           title: "Lecture 1",
           content: "Content of Lecture 1",
         },
-        { type: "quiz", title: "Quiz 1", content: "Content of Quiz 1" },
+        { type: "quiz", title: "Quiz 1", description: "Quiz Description" },
         {
           type: "lecture",
           title: "Lecture 2",
@@ -49,7 +50,7 @@ const Curriculum = () => {
           title: "Lecture 1",
           content: "Content of Lecture 1",
         },
-        { type: "quiz", title: "Quiz 1", content: "Content of Quiz 1" },
+        { type: "quiz", title: "Quiz 1", description: "Quiz Description" },
         {
           type: "lecture",
           title: "Lecture 2",
@@ -59,30 +60,27 @@ const Curriculum = () => {
     },
   ]);
 
-  const handleEditSectionTitle = (index) => {
-    setEditSectionIndex(index);
-    setEditedSectionTitle(sections[index].title);
-  };
-
-  const handleSaveSectionTitle = (index) => {
-    // Save the new title logic here
-    sections[index].title = editedSectionTitle; // Update section title
-    setEditSectionIndex(null); // Hide the edit form
+  const handleSaveSectionTitle = (index, newTitle, newObjective) => {
+    const updatedSections = [...sections];
+    updatedSections[index].title = newTitle; // Update section title
+    updatedSections[index].objective = newObjective; // Update section objective
+    setSections(updatedSections);
   };
 
   const handleEditLectureTitle = (sectionIndex, lectureIndex) => {
     setEditLectureIndex(`${sectionIndex}-${lectureIndex}`);
     setEditedLectureTitle(sections[sectionIndex].items[lectureIndex].title);
-    setEditLectureContent(sections[sectionIndex].items[lectureIndex].content);
-    console.log(editLectureContent);
+    setEditQuizDescription(
+      sections[sectionIndex].items[lectureIndex].description
+    );
   };
 
   const handleSaveLectureTitle = (sectionIndex, lectureIndex) => {
     // Save the updated title and content
     const updatedSections = [...sections];
     updatedSections[sectionIndex].items[lectureIndex].title = editLectureTitle;
-    updatedSections[sectionIndex].items[lectureIndex].content =
-      editLectureContent;
+    updatedSections[sectionIndex].items[lectureIndex].description =
+      editQuizDescription;
     setSections(updatedSections);
     setEditLectureIndex(null);
   };
@@ -113,40 +111,29 @@ const Curriculum = () => {
 
   const handleLectureFormVisibility = (index) => {
     setLectureFormVisible((prevIndex) => (prevIndex === index ? null : index));
-    setNewLectureTitle("");
   };
 
   const handleQuizFormVisibility = (index) => {
     setQuizFormVisible((prevIndex) => (prevIndex === index ? null : index));
-    setNewQuizTitle("");
-    setEditLectureContent("");
+    setEditQuizDescription("");
   };
 
-  const handleAddItem = (sectionIndex, type) => {
-    const title = type === "lecture" ? newLectureTitle : newQuizTitle;
-    if (title.length === 0) {
-      setErrorMessage("This field may not be blank.");
-      return;
-    }
-    if (title.length < 3) {
-      setErrorMessage("Titles must have minimum 3 characters.");
-      return;
-    }
-    if (title.trim()) {
-      const updatedSections = [...sections];
-      updatedSections[sectionIndex].items.push({
-        type,
-        title,
-        content:
-          type === "lecture" ? "New lecture content" : editLectureContent,
-      });
-      setSections(updatedSections);
-      setLectureFormVisible(null);
-      setQuizFormVisible(null);
-      setErrorMessage("");
-      setEditLectureContent("");
-      setVisibleSectionIndex(null);
-    }
+  const handleAddItem = (sectionIndex, type, newItemTitle, newQuizContent) => {
+    const newItem = {
+      type,
+      title: newItemTitle,
+      description: type === "quiz" ? newQuizContent : "", // Only set description for quizzes
+      content: type === "lecture" ? "" : "", // This is fine for lectures
+    };
+    const updatedSections = [...sections];
+    updatedSections[sectionIndex].items.push(newItem);
+    setSections(updatedSections);
+
+    // Reset the form visibility and related states
+    setLectureFormVisible(null);
+    setQuizFormVisible(null);
+    setEditQuizDescription("");
+    setVisibleSectionIndex(null);
   };
 
   const handleDeleteItem = (sectionIndex, itemIndex) => {
@@ -281,51 +268,12 @@ const Curriculum = () => {
                       className="border border-gray-600 bg-gray-100 my-4"
                     >
                       {editSectionIndex === sectionIndex ? (
-                        <div className="flex gap-3 border border-black p-4 bg-white m-2 items-start">
-                          <div className="bold">
-                            Section {sectionIndex + 1}:
-                          </div>
-
-                          <div className="flex-1">
-                            <input
-                              type="text"
-                              value={editedSectionTitle}
-                              onChange={(e) =>
-                                setEditedSectionTitle(e.target.value)
-                              }
-                              className="border border-black pl-2 px-4 py-1 w-full"
-                            />
-                            <div className="mt-4">
-                              <p className="font-bold text-sm">
-                                What will students be able to do at the end of
-                                this section?
-                              </p>
-                              <input
-                                type="text"
-                                value={sections[sectionIndex].objective}
-                                className="border border-black pl-2 px-4 py-1 my-2 w-full"
-                              />
-                            </div>
-                            <div className="flex gap-4 justify-end">
-                              <button
-                                className="font-bold text-black"
-                                onClick={() => {
-                                  setEditSectionIndex(null);
-                                }}
-                              >
-                                Cancel
-                              </button>
-                              <button
-                                className="bg-gray-900 font-bold text-white px-4 py-1"
-                                onClick={() =>
-                                  handleSaveSectionTitle(sectionIndex)
-                                }
-                              >
-                                Save Section
-                              </button>
-                            </div>
-                          </div>
-                        </div>
+                        <NewSectionForm
+                          sectionIndex={sectionIndex}
+                          sections={sections}
+                          setEditSectionIndex={setEditSectionIndex}
+                          handleSaveSectionTitle={handleSaveSectionTitle}
+                        />
                       ) : (
                         <div
                           {...provided.dragHandleProps}
@@ -345,7 +293,7 @@ const Curriculum = () => {
                               <FaPen
                                 className="text-xs cursor-pointer"
                                 onClick={() =>
-                                  handleEditSectionTitle(sectionIndex)
+                                  setEditSectionIndex(sectionIndex)
                                 }
                               />
                               <FaTrash
@@ -378,142 +326,123 @@ const Curriculum = () => {
                                   <>
                                     {editLectureIndex ===
                                     `${sectionIndex}-${itemIndex}` ? (
-                                      <div className="my-4 ml-20 mr-2 p-3 flex items-center border border-gray-600 bg-white group cursor-move">
-                                        <div className="flex items-start flex-1 gap-2">
-                                          <div className="flex items-center gap-2">
+                                      <EditItemForm
+                                        item={item}
+                                        sectionIndex={sectionIndex}
+                                        itemIndex={itemIndex}
+                                        editLectureTitle={editLectureTitle}
+                                        setEditedLectureTitle={
+                                          setEditedLectureTitle
+                                        }
+                                        editQuizDescription={
+                                          editQuizDescription
+                                        }
+                                        setEditQuizDescription={
+                                          setEditQuizDescription
+                                        }
+                                        handleSaveLectureTitle={
+                                          handleSaveLectureTitle
+                                        }
+                                        setEditLectureIndex={
+                                          setEditLectureIndex
+                                        }
+                                        getItemNumber={getItemNumber}
+                                      />
+                                    ) : (
+                                      <>
+                                        <div
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                          className="relative mt-4 ml-20 mr-2 p-3 flex items-center border border-gray-600 bg-white group cursor-move"
+                                        >
+                                          <div className=" flex items-center gap-4 flex-1">
                                             <IoIosCheckmarkCircle className="text-gray-800" />
                                             <h3 className="font-medium">
                                               {item.type === "lecture"
                                                 ? "Lecture"
-                                                : "Quiz"}
+                                                : "Quiz"}{" "}
                                               {getItemNumber(
                                                 sectionIndex,
                                                 itemIndex
                                               )}
                                               :
                                             </h3>
-                                          </div>
-                                          <div className="flex-1">
-                                            <input
-                                              type="text"
-                                              value={editLectureTitle}
-                                              onChange={(e) =>
-                                                setEditedLectureTitle(
-                                                  e.target.value
-                                                )
-                                              }
-                                              className="border border-black pl-2 px-4 py-1 w-full"
-                                            />
-                                            {item.type === "quiz" ? (
-                                              <div className="mt-3">
-                                                <RichText3
-                                                  content={editLectureContent}
-                                                  onChange={(newContent) =>
-                                                    setEditLectureContent(
-                                                      newContent
-                                                    )
-                                                  }
-                                                />
-                                              </div>
-                                            ) : (
-                                              ""
-                                            )}
-                                            <div className="flex gap-4 mt-4 justify-end">
-                                              <button
-                                                className="font-bold text-black"
-                                                onClick={() => {
-                                                  setEditLectureIndex(null);
-                                                }}
-                                              >
-                                                Cancel
-                                              </button>
-                                              {item.type === "quiz" ? (
-                                                <button
-                                                  className="bg-gray-900 font-bold text-white px-4 py-1"
-                                                  onClick={() =>
-                                                    handleSaveLectureTitle(
-                                                      sectionIndex,
-                                                      itemIndex
-                                                    )
-                                                  }
-                                                >
-                                                  Save Quiz
-                                                </button>
+                                            <div className="flex items-center gap-2">
+                                              {item.type === "lecture" ? (
+                                                <MdOutlineInsertDriveFile />
                                               ) : (
-                                                <button
-                                                  className="bg-gray-900 font-bold text-white px-4 py-1"
-                                                  onClick={() =>
-                                                    handleSaveLectureTitle(
-                                                      sectionIndex,
-                                                      itemIndex
-                                                    )
-                                                  }
-                                                >
-                                                  Save Lecture
-                                                </button>
+                                                <GoQuestion />
                                               )}
+                                              <p>{item.title}</p>
+                                            </div>
+                                            <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                              <FaPen
+                                                className="text-xs cursor-pointer"
+                                                onClick={() => {
+                                                  handleEditLectureTitle(
+                                                    sectionIndex,
+                                                    itemIndex
+                                                  );
+                                                }}
+                                              />
+                                              <FaTrash
+                                                className="text-xs cursor-pointer"
+                                                onClick={() =>
+                                                  handleDeleteItem(
+                                                    sectionIndex,
+                                                    itemIndex
+                                                  )
+                                                }
+                                              />
                                             </div>
                                           </div>
-                                        </div>
-                                      </div>
-                                    ) : (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        className="my-4 ml-20 mr-2 p-3 flex items-center border border-gray-600 bg-white group cursor-move"
-                                      >
-                                        <div className="flex items-center gap-4 flex-1">
-                                          <IoIosCheckmarkCircle className="text-gray-800" />
-                                          <h3 className="font-medium">
-                                            {item.type === "lecture"
-                                              ? "Lecture"
-                                              : "Quiz"}{" "}
-                                            {getItemNumber(
-                                              sectionIndex,
-                                              itemIndex
-                                            )}
-                                            :
-                                          </h3>
-                                          <div className="flex items-center gap-2">
+                                          <div className="flex items-center gap-4">
                                             {item.type === "lecture" ? (
-                                              <MdOutlineInsertDriveFile />
+                                              <>
+                                                <button
+                                                  className={`flex items-center gap-2 border border-gray-800 py-[3px] px-2 font-medium hover:bg-gray-100 ${
+                                                    addContent ===
+                                                      `${sectionIndex}-${itemIndex}` &&
+                                                    "hidden"
+                                                  }`}
+                                                  onClick={() =>
+                                                    setAddContent(
+                                                      `${sectionIndex}-${itemIndex}`
+                                                    )
+                                                  }
+                                                >
+                                                  <FaPlus /> Content
+                                                </button>
+                                                {addContent ===
+                                                  `${sectionIndex}-${itemIndex}` && (
+                                                  <div className="absolute right-10 -bottom-[1px] bg-white flex items-center gap-2 border border-black border-b-0 p-1 cursor-default">
+                                                    <p className="font-bold">
+                                                      Select contetn type
+                                                    </p>
+                                                    <IoMdClose
+                                                      className="text-lg cursor-pointer"
+                                                      onClick={() =>
+                                                        setAddContent(null)
+                                                      }
+                                                    />
+                                                  </div>
+                                                )}
+                                              </>
                                             ) : (
-                                              <GoQuestion />
+                                              <button className="flex items-center gap-2 border border-gray-800 py-[3px] px-2 font-medium hover:bg-gray-100">
+                                                <FaPlus /> Question
+                                              </button>
                                             )}
-                                            <p>{item.title}</p>
-                                          </div>
-                                          <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                            <FaPen
-                                              className="text-xs cursor-pointer"
-                                              onClick={() => {
-                                                handleEditLectureTitle(
-                                                  sectionIndex,
-                                                  itemIndex
-                                                );
-                                              }}
-                                            />
-                                            <FaTrash
-                                              className="text-xs cursor-pointer"
-                                              onClick={() =>
-                                                handleDeleteItem(
-                                                  sectionIndex,
-                                                  itemIndex
-                                                )
-                                              }
-                                            />
+
+                                            <IoIosMenu className="text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                           </div>
                                         </div>
-                                        <div className="flex items-center gap-4">
-                                          <button className="flex items-center gap-2 border border-gray-800 py-[3px] px-2 font-medium hover:bg-gray-100">
-                                            <FaPlus />{" "}
-                                            {item.type === "lecture"
-                                              ? "Content"
-                                              : "Questions"}
-                                          </button>
-                                          <IoIosMenu className="text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                        </div>
-                                      </div>
+                                        {addContent ===
+                                          `${sectionIndex}-${itemIndex}` && (
+                                          <AddContentForm />
+                                        )}
+                                      </>
                                     )}
                                   </>
                                 )}
@@ -581,108 +510,18 @@ const Curriculum = () => {
                                 )}
 
                               {lectureFormVisible === sectionIndex && (
-                                <div className="flex p-4 border border-black mr-2 bg-white">
-                                  <p>New Lecture:</p>
-                                  <div className="flex-1 ml-3">
-                                    <div className="relative">
-                                      <input
-                                        type="text"
-                                        placeholder="Enter title"
-                                        value={newLectureTitle}
-                                        onChange={(e) =>
-                                          setNewLectureTitle(e.target.value)
-                                        }
-                                        maxLength={80}
-                                        className={`border border-black pl-4 pr-8 py-1 w-full outline-none ${
-                                          errorMessage
-                                            ? "border-2 border-orange-300"
-                                            : "border-black"
-                                        }`}
-                                      />
-                                      <span className="text-gray-500 absolute right-3 top-1">
-                                        {80 - newLectureTitle.length}
-                                      </span>
-                                    </div>
-                                    {newLectureTitle.length < 3 && (
-                                      <p className="text-red-900 text-xs mt-2">
-                                        {errorMessage}
-                                      </p>
-                                    )}
-                                    <div className="flex justify-end flex-1 mt-10">
-                                      <button
-                                        onClick={() =>
-                                          setLectureFormVisible(null)
-                                        }
-                                        className="font-medium text-black px-3 py-1"
-                                      >
-                                        Cancel
-                                      </button>
-                                      <button
-                                        onClick={() =>
-                                          handleAddItem(sectionIndex, "lecture")
-                                        }
-                                        className="bg-black font-medium text-white px-3 py-1"
-                                      >
-                                        Add Lecture
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
+                                <NewLectureForm
+                                  sectionIndex={sectionIndex}
+                                  setLectureFormVisible={setLectureFormVisible}
+                                  handleAddItem={handleAddItem}
+                                />
                               )}
                               {quizFormVisible === sectionIndex && (
-                                <div className="flex p-4 border border-black mr-2 bg-white">
-                                  <p>New Quiz:</p>
-                                  <div className="flex-1 ml-3">
-                                    <div className="relative">
-                                      <input
-                                        type="text"
-                                        placeholder="Enter title"
-                                        value={newQuizTitle}
-                                        onChange={(e) =>
-                                          setNewQuizTitle(e.target.value)
-                                        }
-                                        maxLength={80}
-                                        className={`border border-black pl-4 pr-8 py-1 w-full outline-none ${
-                                          errorMessage
-                                            ? "border-2 border-orange-300"
-                                            : "border-black"
-                                        }`}
-                                      />
-                                      <span className="text-gray-500 absolute right-3 top-1">
-                                        {80 - newQuizTitle.length}
-                                      </span>
-                                    </div>
-                                    {newQuizTitle.length < 3 && (
-                                      <p className="text-red-900 text-xs mt-2">
-                                        {errorMessage}
-                                      </p>
-                                    )}
-                                    <div className="mt-3">
-                                      <RichText3
-                                        content={editLectureContent}
-                                        onChange={(newContent) =>
-                                          setEditLectureContent(newContent)
-                                        }
-                                      />
-                                    </div>
-                                    <div className="flex justify-end flex-1 mt-10">
-                                      <button
-                                        onClick={() => setQuizFormVisible(null)}
-                                        className="font-medium text-black px-3 py-1"
-                                      >
-                                        Cancel
-                                      </button>
-                                      <button
-                                        onClick={() =>
-                                          handleAddItem(sectionIndex, "quiz")
-                                        }
-                                        className="bg-black font-medium text-white px-3 py-1"
-                                      >
-                                        Add Quiz
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
+                                <NewQuizForm
+                                  sectionIndex={sectionIndex}
+                                  setQuizFormVisible={setQuizFormVisible}
+                                  handleAddItem={handleAddItem}
+                                />
                               )}
                             </div>
                           </div>
