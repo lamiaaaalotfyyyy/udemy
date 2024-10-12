@@ -8,25 +8,45 @@ import InstructorFooter from "../instractorFooter/page";
 import RichText from "../../_components/RichText/RichText";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
-// Pass user ID as a prop if applicable
-
-export default function Page(userId) {
+export default function Page() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    
+    name: "",
+    headline:"",
+    social: {
+      facebook: "",
+      twitter: "",
+      linkedin: "",
+      youtube: "",
+    },
   });
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  
 
   const handleChangeUpdate = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+
+    if (name in formData.social) {
+      // Update social field
+      setFormData((prevData) => ({
+        ...prevData,
+        social: {
+          ...prevData.social,
+          [name]: value,
+        },
+      }));
+    } else {
+      // Update other fields
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (event) => {
+    console.log(formData.social.facebook);
     event.preventDefault();
     setIsLoading(true);
     setError(null);
@@ -34,26 +54,28 @@ export default function Page(userId) {
 
     try {
       const response = await axios.put(
-        `https://udemy-eosin-eight.vercel.app/user${userId}`,
+        `https://udemy-eosin-eight.vercel.app/user/669904f9ad62aaee0f072f8a`,
+
         formData
       );
       setSuccess("User data updated successfully!");
     } catch (error) {
       console.error(error);
-      setError("An error occurred. Please try again later.");
+      setError(
+        error.response?.data?.message ||
+          "An error occurred. Please try again later."
+      );
     } finally {
       setIsLoading(false);
     }
   };
   const [activeTab, setActiveTab] = useState("Udemy profile");
-  const [bio, setBio] = useState("");
+
   const MAX_CHARS = 60;
   const [remainingChars, setRemainingChars] = useState(MAX_CHARS);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
+  const handleChange = () => {
     if (MAX_CHARS - value.length >= 0) {
-      setBio(value);
       setRemainingChars(MAX_CHARS - value.length);
     }
   };
@@ -128,7 +150,12 @@ export default function Page(userId) {
                             class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             id="grid-first-name"
                             type="text"
-                            placeholder="Jane"
+                            name="name"
+                            placeholder="First Name"
+                            value={formData.name}
+                               onChange={(e) => {
+                              handleChangeUpdate(e);
+                            }} 
                           />
                         </div>
                         <div class="w-full md:w-1/2 px-3">
@@ -157,7 +184,12 @@ export default function Page(userId) {
                             class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                             id="grid-first-name"
                             type="text"
-                            placeholder="Jane"
+                            placeholder="Last Name"
+                            name="lastName"
+                         /*    value={formData.name}
+                            onChange={(e) => {
+                              handleChangeUpdate(e);
+                            }} */
                           />
                         </div>
                         <div className="w-full md:w-1/2 px-3 mt-6 md:mb-0">
@@ -179,6 +211,11 @@ export default function Page(userId) {
                               class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               id="grid-twittre-url"
                               aria-describedby="basic-addon3"
+                              name="twitter"
+                              value={formData.social.twitter}
+                              onChange={(e) => {
+                                handleChangeUpdate(e);
+                              }}
                             />
                           </div>
                         </div>
@@ -191,12 +228,17 @@ export default function Page(userId) {
                           </label>
                           <div class="relative">
                             <input
+                                name="headline"
+                              value={formData.headline}
+                              onChange={(e) => {
+                                handleChangeUpdate(e);
+                              }} 
                               class="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               id="grid-first-name"
                               type="text"
                               placeholder="Instructor at Udemy"
-                              value={bio}
-                              onChange={handleChange}
+                              /*     value={bio}
+                              onChange={handleChange} */
                             />
                             <span className="absolute top-0 right-0 m-2 text-gray-500">
                               {remainingChars}
@@ -218,6 +260,11 @@ export default function Page(userId) {
                               http://www.facebook.com/
                             </span>
                             <input
+                              name="facebook"
+                              value={formData.social.facebook}
+                              onChange={(e) => {
+                                handleChangeUpdate(e);
+                              }}
                               type="text"
                               class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               id="grid-facebooke-url"
@@ -232,7 +279,6 @@ export default function Page(userId) {
                           >
                             Biography
                           </label>
-
                           <RichText />
                           <div className="text-gray-400 font-normal text-xs mt-2">
                             To help learners learn more about you, your bio
@@ -256,6 +302,11 @@ export default function Page(userId) {
                               http://www.linkedin.com/
                             </span>
                             <input
+                              name="linkedin"
+                              value={formData.social.linkedin}
+                              onChange={(e) => {
+                                handleChangeUpdate(e);
+                              }}
                               type="text"
                               class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               id="grid-linkedin-url"
@@ -277,6 +328,11 @@ export default function Page(userId) {
                               http://www.youtube.com/
                             </span>
                             <input
+                              name="youtube"
+                              value={formData.social.youtube}
+                              onChange={(e) => {
+                                handleChangeUpdate(e);
+                              }}
                               type="text"
                               class="relative m-0 block flex-auto appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               id="grid-youtube-url"
@@ -318,10 +374,9 @@ export default function Page(userId) {
                           </select>
                         </div>
                       </div>
-
                       <div className="flex items-center space-x-2">
                         <Button
-                          ctype="submit"
+                          type="submit"
                           disabled={isLoading}
                           className="bg-black text-white hover:bg-gray-700 w-20 h-14 font-bold text-lg mt-4"
                         >
