@@ -105,11 +105,11 @@ export default function Page() {
               <a
                 href="#"
                 className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
-                  activeTab === " Photo"
+                  activeTab === "Photo"
                     ? "bg-gray-500 text-white"
                     : "text-black"
                 }`}
-                onClick={() => setActiveTab(" Photo")}
+                onClick={() => setActiveTab("Photo")}
               >
                 Photo
               </a>
@@ -135,7 +135,7 @@ export default function Page() {
                     ? "bg-gray-500 text-white"
                     : "text-black"
                 }`}
-                onClick={() => setActiveTab(" Close account")}
+                onClick={() => setActiveTab("Close account")}
               >
                 Close account
               </a>
@@ -145,6 +145,7 @@ export default function Page() {
 
         <div className="col-span-10 border-y border-e border-gray-300">
           <div className=" text-black mr-6">
+            {/* profile Tap */}
             {activeTab === "Profile" && (
               <>
                 <div className="flex border-b border-gray-300 py-4">
@@ -159,252 +160,372 @@ export default function Page() {
                 </div>
                 <div className="mx-32 px-7">
                   <form onSubmit={handleSubmit}>
-                  <h2 className="font-semibold px-3 mt-3">Basics:</h2>
-                  <div class="w-full px-3 mt-2 m mb-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-first-name"
-                    ></label>
-                    <input
-                      class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-first-name"
-                      type="text"
-                      name="name"
-                      placeholder="First Name"
-                      value={formData.name}
-                      onChange={(e) => {
-                        handleChangeUpdate(e);
-                      }}
-                    />
-                  </div>
-
-                  <div class="w-full  px-3 mt-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-first-name"
-                    ></label>
-                    <input
-                      class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-first-name"
-                      type="text"
-                      placeholder="Last Name"
-                      name="lastName"
-                    />
-                  </div>
-                  <div class="w-full  px-3 mt-6 md:mb-0">
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-headline"
-                    ></label>
-                    <div class="relative">
+                    <h2 className="font-semibold px-3 mt-3">Basics:</h2>
+                    <div class="w-full px-3 mt-2 m mb-6 md:mb-0">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-first-name"
+                      ></label>
                       <input
-                        name="headline"
-                        value={formData.headline}
-                        onChange={(e) => {
-                          handleChangeUpdate(e);
-                        }}
-                        class="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-first-name"
                         type="text"
-                        placeholder="Headline"
-                        /*     value={bio}
+                        name="name"
+                        placeholder="First Name"
+                        value={formData.name}
+                        onChange={(e) => {
+                          handleChangeUpdate(e);
+                        }}
+                      />
+                    </div>
+
+                    <div class="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-first-name"
+                      ></label>
+                      <input
+                        class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        placeholder="Last Name"
+                        name="lastName"
+                      />
+                    </div>
+                    <div class="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-headline"
+                      ></label>
+                      <div class="relative">
+                        <input
+                          name="headline"
+                          value={formData.headline}
+                          onChange={(e) => {
+                            handleChangeUpdate(e);
+                          }}
+                          class="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="grid-first-name"
+                          type="text"
+                          placeholder="Headline"
+                          /*     value={bio}
                               onChange={handleChange} */
+                        />
+                        <span className="absolute top-0 right-0 m-2 text-gray-500">
+                          {/* {remainingChars} */}
+                        </span>
+                      </div>
+                      <div className="flex align-center text-gray-600 text-xs">
+                        Add a professional headline like, "Instructor at Udemy"
+                        or "Architect."
+                      </div>
+                    </div>
+                    <div className="w-full px-3 mt-6 md:mb-0  ">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-biography"
+                      ></label>
+                      <RichText />
+                      <div className="text-gray-600 text-xs align-center mt-2">
+                        Links and coupon codes are not permitted in this
+                        section.
+                      </div>
+                    </div>
+                    <div className="w-ful  px-3 mt-6 md:mb-0 border-b border-gray-300 ">
+                      <label
+                        for="grid-youtube-url"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      ></label>
+                      <select
+                        id="laguage"
+                        class=" border  border-black py-3 px-4 mb-3 text-gray-900 text-sm  block w-full h-12"
+                      >
+                        <option className="  " selected>
+                          {" "}
+                          English (US)
+                        </option>
+                        <option value="US"> English (US)</option>
+                        <option value="CA">Canada</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                        <option value="ES">Spain</option>
+                        <option value="IT">Italy</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="NL">Netherlands</option>
+                        <option value="AU">Australia</option>
+                        <option value="NZ">New Zealand</option>
+                        <option value="IN">India</option>
+                        <option value="BR">Brazil</option>
+                        <option value="MX">Mexico</option>
+                        <option value="CN">China</option>
+                        <option value="RU">Russia</option>
+                      </select>
+                    </div>
+
+                    <div class="w-full  px-3 mt-6 md:mb-0">
+                      <h2 className="font-bold"> Links:</h2>
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3"
+                        for="grid-first-name"
+                      ></label>
+                      <input
+                        class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        placeholder="Website (http(s)://..)"
+                        name="lastName"
                       />
-                      <span className="absolute top-0 right-0 m-2 text-gray-500">
-                        {/* {remainingChars} */}
-                      </span>
                     </div>
-                    <div className="flex align-center text-gray-600 text-xs">
-                      Add a professional headline like, "Instructor at Udemy" or
-                      "Architect."
+                    <div className="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        for="grid-twittre-url"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      ></label>
+                      <div class="relative  flex w-full items-stretch">
+                        <span
+                          class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
+                          id="basic-addon3"
+                        >
+                          http://www.twitter.com/
+                        </span>
+                        <input
+                          placeholder="Twitter Profile"
+                          type="text"
+                          class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="grid-twittre-url"
+                          aria-describedby="basic-addon3"
+                          name="twitter"
+                          value={formData.social.twitter}
+                          onChange={(e) => {
+                            handleChangeUpdate(e);
+                          }}
+                        />
+                      </div>
+                      <div className="flex align-center text-gray-600 text-xs">
+                        Add your Twitter username (e.g. johnsmith).
+                      </div>
                     </div>
+                    <div className="w-full px-3 mt-6 md:mb-0">
+                      <label
+                        for="grid-facebook-url"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      ></label>
+                      <div class="relative  flex w-full items-stretch">
+                        <span
+                          class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
+                          id="basic-addon3"
+                        >
+                          http://www.facebook.com/
+                        </span>
+                        <input
+                          placeholder="Facebook Profile"
+                          name="facebook"
+                          value={formData.social.facebook}
+                          onChange={(e) => {
+                            handleChangeUpdate(e);
+                          }}
+                          type="text"
+                          class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="grid-facebooke-url"
+                          aria-describedby="basic-addon3"
+                        />
+                      </div>
+                      <div className="flex align-center text-gray-600 text-xs">
+                        Input your Facebook username (e.g. johnsmith).
+                      </div>
+                    </div>
+
+                    <div className="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        for="grid-linkedin-url"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      ></label>
+                      <div class="relative  flex w-full items-stretch">
+                        <span
+                          class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
+                          id="basic-addon3"
+                        >
+                          http://www.linkedin.com/
+                        </span>
+                        <input
+                          placeholder="LinkedIn Profile"
+                          name="linkedin"
+                          value={formData.social.linkedin}
+                          onChange={(e) => {
+                            handleChangeUpdate(e);
+                          }}
+                          type="text"
+                          class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="grid-linkedin-url"
+                          aria-describedby="basic-addon3"
+                        />
+                      </div>
+                      <div className="flex align-center text-gray-600 text-xs">
+                        Input your LinkedIn resource id (e.g. in/johnsmith).
+                      </div>
+                    </div>
+                    <div className="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        for="grid-youtube-url"
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                      ></label>
+                      <div class="relative flex w-full items-stretch">
+                        <span
+                          class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
+                          id="basic-addon3"
+                        >
+                          http://www.youtube.com/
+                        </span>
+                        <input
+                          placeholder="YouTube  Profile"
+                          name="youtube"
+                          value={formData.social.youtube}
+                          onChange={(e) => {
+                            handleChangeUpdate(e);
+                          }}
+                          type="text"
+                          class="relative m-0 block flex-auto appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                          id="grid-youtube-url"
+                          aria-describedby="basic-addon3"
+                        />
+                      </div>
+                      <div className="flex align-center text-gray-600 text-xs">
+                        Input your Youtube username (e.g. johnsmith).
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 my-6 px-3 ">
+                      <Button
+                        type="submit"
+                        disabled={isLoading}
+                        className="bg-black text-white hover:bg-gray-700 w-20 h-12 font-bold text-lg mt-4"
+                      >
+                        {isLoading ? "Saving..." : "Save"}
+                      </Button>
+                    </div>
+                  </form>
+                </div>
+              </>
+            )}
+
+            {/* Photo Tap */}
+            {activeTab === "Photo" && (
+              <>
+                <div className="flex border-b border-gray-300 py-4">
+                  <div class="mx-auto max-w-7xl px-6 text-center">
+                    <h1 className="font-heading font-bold leading-tight tracking-normal text-lg sm:text-xl md:text-2xl max-w-3xl">
+                      Photo
+                    </h1>
+                    <p className="font-text mt-2 leading-6 ">
+                      Add a nice photo of yourself for your profile.
+                    </p>
                   </div>
-                  <div className="w-full px-3 mt-6 md:mb-0  ">
+                </div>
+                <div className="mx-32 px-7">
+                  <p className="font-heading font-bold  my-4  leading-tight tracking-normal ">
+                    Image preview
+                  </p>
+
+                  <div class="flex items-center justify-center w-full">
                     <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      for="grid-biography"
-                    ></label>
-                    <RichText />
-                    <div className="text-gray-600 text-xs align-center mt-2">
-                      Links and coupon codes are not permitted in this section.
-                    </div>
-                  </div>
-                  <div className="w-ful  px-3 mt-6 md:mb-0 border-b border-gray-300 ">
-                    <label
-                      for="grid-youtube-url"
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    ></label>
-                    <select
-                      id="laguage"
-                      class=" border  border-black py-3 px-4 mb-3 text-gray-900 text-sm  block w-full h-12"
+                      for="dropzone-file"
+                      class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                     >
-                      <option className="  " selected>
-                        {" "}
-                        English (US)
-                      </option>
-                      <option value="US"> English (US)</option>
-                      <option value="CA">Canada</option>
-                      <option value="FR">France</option>
-                      <option value="DE">Germany</option>
-                      <option value="ES">Spain</option>
-                      <option value="IT">Italy</option>
-                      <option value="UK">United Kingdom</option>
-                      <option value="NL">Netherlands</option>
-                      <option value="AU">Australia</option>
-                      <option value="NZ">New Zealand</option>
-                      <option value="IN">India</option>
-                      <option value="BR">Brazil</option>
-                      <option value="MX">Mexico</option>
-                      <option value="CN">China</option>
-                      <option value="RU">Russia</option>
-                    </select>
+                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg
+                          class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 20 16"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                          />
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                          <span class="font-semibold">Click to upload</span> or
+                          drag and drop
+                        </p>
+                        {/* <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
+                      </div>
+                      <input id="dropzone-file" type="file" class="hidden" />
+                    </label>
                   </div>
-
-                  <div class="w-full  px-3 mt-6 md:mb-0">
-                    <h2 className="font-bold"> Links:</h2>
-                    <label
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-3"
-                      for="grid-first-name"
-                    ></label>
-                    <input
-                      class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                      id="grid-first-name"
-                      type="text"
-                      placeholder="Website (http(s)://..)"
-                      name="lastName"
-                    />
+                  {/* button save */}
+                  <div className="flex items-center mb-28 space-x-2">
+                    <Button className="bg-zinc-800 text-white hover:bg-zinc-700 w-20 h-12 font-bold text-lg mt-6">
+                      Save
+                    </Button>
                   </div>
-                  <div className="w-full  px-3 mt-6 md:mb-0">
-                    <label
-                      for="grid-twittre-url"
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    ></label>
-                    <div class="relative  flex w-full items-stretch">
-                      <span
-                        class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
-                        id="basic-addon3"
-                      >
-                        http://www.twitter.com/
-                      </span>
-                      <input
-                        placeholder="Twitter Profile"
-                        type="text"
-                        class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-twittre-url"
-                        aria-describedby="basic-addon3"
-                        name="twitter"
-                        value={formData.social.twitter}
-                        onChange={(e) => {
-                          handleChangeUpdate(e);
-                        }}
-                      />
-                    </div>
-                    <div className="flex align-center text-gray-600 text-xs">
-                      Add your Twitter username (e.g. johnsmith).
-                    </div>
-                  </div>
-                  <div className="w-full px-3 mt-6 md:mb-0">
-                    <label
-                      for="grid-facebook-url"
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    ></label>
-                    <div class="relative  flex w-full items-stretch">
-                      <span
-                        class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
-                        id="basic-addon3"
-                      >
-                        http://www.facebook.com/
-                      </span>
-                      <input
-                        placeholder="Facebook Profile"
-                        name="facebook"
-                        value={formData.social.facebook}
-                        onChange={(e) => {
-                          handleChangeUpdate(e);
-                        }}
-                        type="text"
-                        class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-facebooke-url"
-                        aria-describedby="basic-addon3"
-                      />
-                    </div>
-                    <div className="flex align-center text-gray-600 text-xs">
-                      Input your Facebook username (e.g. johnsmith).
-                    </div>
-                  </div>
-
-                  <div className="w-full  px-3 mt-6 md:mb-0">
-                    <label
-                      for="grid-linkedin-url"
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    ></label>
-                    <div class="relative  flex w-full items-stretch">
-                      <span
-                        class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
-                        id="basic-addon3"
-                      >
-                        http://www.linkedin.com/
-                      </span>
-                      <input
-                        placeholder="LinkedIn Profile"
-                        name="linkedin"
-                        value={formData.social.linkedin}
-                        onChange={(e) => {
-                          handleChangeUpdate(e);
-                        }}
-                        type="text"
-                        class="relative m-0 block flex-auto  appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-linkedin-url"
-                        aria-describedby="basic-addon3"
-                      />
-                    </div>
-                    <div className="flex align-center text-gray-600 text-xs">
-                      Input your LinkedIn resource id (e.g. in/johnsmith).
-                    </div>
-                  </div>
-                  <div className="w-full  px-3 mt-6 md:mb-0">
-                    <label
-                      for="grid-youtube-url"
-                      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                    ></label>
-                    <div class="relative flex w-full items-stretch">
-                      <span
-                        class="inline-flex items-center whitespace-nowrap text-black bg-gray-100 border border-black py-3 px-4 mb-3 text-center text-base font-normal leading-[1.6] text-surface dark:border-white/10 dark:text-white"
-                        id="basic-addon3"
-                      >
-                        http://www.youtube.com/
-                      </span>
-                      <input
-                        placeholder="YouTube  Profile"
-                        name="youtube"
-                        value={formData.social.youtube}
-                        onChange={(e) => {
-                          handleChangeUpdate(e);
-                        }}
-                        type="text"
-                        class="relative m-0 block flex-auto appearance-none  w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-youtube-url"
-                        aria-describedby="basic-addon3"
-                      />
-                    </div>
-                    <div className="flex align-center text-gray-600 text-xs">
-                      Input your Youtube username (e.g. johnsmith).
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2 my-6 px-3 ">
-                  <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className="bg-black text-white hover:bg-gray-700 w-20 h-12 font-bold text-lg mt-4"
-                  >
-                    {isLoading ? "Saving..." : "Save"}
-                  </Button>
                 </div>
-              </form>
+              </>
+            )}
+            {/* Close account Tap */}
+            {activeTab === "Close account" && (
+              <>
+                <div className="flex border-b border-gray-300 py-4">
+                  <div class="mx-auto max-w-7xl px-6 text-center">
+                    <h1 className="font-heading font-bold leading-tight tracking-normal text-lg sm:text-xl md:text-2xl max-w-3xl">
+                      Close Account
+                    </h1>
+                    <p className="font-text mt-2 leading-6 ">
+                      Close your account permanently
+                    </p>
+                  </div>
                 </div>
-                </>
-
+                <div className="mx-32 px-7">
+                  <div className="mt-4">
+                    <p>
+                    <b className="text-red-700 "> Warning:</b>
+                      If you close your account, you will be unsubscribed from
+                      all 0 of your courses and will lose access to your account
+                      and data associated with your account forever, even if you
+                      choose to create a new account using the same email
+                      address in the future.
+                      <br />
+                      <br />
+                      Please note, if you want to reinstate your account after
+                      submitting a deletion request, you will have 14 days after
+                      the initial submission date to reach out to
+                      privacy@udemy.com to cancel this request.
+                    </p>
+                  </div>
+                  {/* button save */}
+                  <div className="flex items-center mb-80 space-x-2">
+                    <Button className="bg-zinc-800 text-white hover:bg-zinc-700 h-12 font-semibold text-lg mt-6">
+                      Close account
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )}
+            {/* Account Security Tap */}
+              {activeTab === " Account Security" && (
+              <>
+                <div className="flex border-b border-gray-300 py-4">
+                  <div class="mx-auto max-w-7xl px-6 text-center">
+                    <h1 className="font-heading font-bold leading-tight tracking-normal text-lg sm:text-xl md:text-2xl max-w-3xl">
+                     Account
+                    </h1>
+                    <p className="font-text mt-2 leading-6 ">
+                    Edit your account settings and change your password here
+                    </p>
+                  </div>
+                </div>
+                <div className="mx-32 px-7">
                 
+                  {/* button save */}
+                  <div className="flex items-center mb-80 space-x-2">
+                    <Button className="bg-zinc-800 text-white hover:bg-zinc-700 h-12 font-semibold text-lg mt-6">
+                      Close account
+                    </Button>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
