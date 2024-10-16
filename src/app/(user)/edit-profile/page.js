@@ -597,14 +597,83 @@ export default function Page() {
                   </div>
                 </div>
                 <div className="mx-32 px-7">
-                
-                  {/* button save */}
-                  <div className="flex items-center mb-80 space-x-2">
-                    <Button className="bg-zinc-800 text-white hover:bg-zinc-700 h-12 font-semibold text-lg mt-6">
-                      Close account
-                    </Button>
+                  <div class="w-full relative px-3 mt-6">
+                    <label class="block mb-2  font-semibold">
+                      <h2 className="font-semibold ">Email:</h2>
+
+                    </label>
+
+
+                    <div class="relative">
+                      <input type="email" class="appearance-none block w-full  text-gray-700 border border-black py-4 px-4 my-3 leading-tight focus:outline-none focus:bg-white" placeholder="Your email address is 030cd5fe3b@emailfoxi.pro" />
+                      <button class="absolute right-1 top-1  border border-l-black  text-4xl transition-all hover:shadow  hover:bg-gray-300 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                        <MdEdit />
+                      </button>
+                    </div>
                   </div>
                 </div>
+                {/* border */}
+                <div className="border-b border-gray-300 mt-6"></div>
+                <div className="mx-32 px-7">
+                  <form onSubmit={handleSubmit}>
+                    <h2 className="font-semibold px-3 mt-6">password:</h2>
+                    <div class="w-full px-3 mt-2 m mb-6 md:mb-0">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-first-name"
+                      ></label>
+                      <input
+                        class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        name="name"
+                        placeholder="Enter current password"
+                        value={formData.name}
+                        onChange={(e) => {
+                          handleChangeUpdate(e);
+                        }}
+                      />
+                    </div>
+
+                    <div class="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-first-name"
+                      ></label>
+                      <input
+                        class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        placeholder="Enter new password"
+                        name="lastName"
+                      />
+                    </div>
+                    <div class="w-full  px-3 mt-6 md:mb-0">
+                      <label
+                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        for="grid-first-name"
+                      ></label>
+                      <input
+                        class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        placeholder="Re-type new password"
+                        name="lastName"
+                      />
+                    </div>
+                    {/* button save */}
+                    <div className="flex items-center mb-80 space-x-2">
+                      <Button className="bg-zinc-800 text-white hover:bg-zinc-700 h-16 font-bold text-lg mt-6">
+                        Change password
+                      </Button>
+                    </div>
+                  </form>
+
+                </div>
+
+
+
+
               </>
             )}
           </div>
