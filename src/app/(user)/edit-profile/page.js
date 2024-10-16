@@ -516,15 +516,40 @@ export default function Page() {
                     </p>
                   </div>
                 </div>
-                <div className="mx-32 px-7">
-                
+                <div className="mx-32 px-7 mt-6 ">
+                <div class="w-full px-3  mb-6 md:mb-0 ">
+                      <label
+                        class="block  tracking-wide text-gray-700 text-sm font-bold mb-2"
+                        for="grid-first-name"
+                        
+                      >Email:</label>
+
+                      <input
+                        class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="grid-first-name"
+                        type="text"
+                        name="name"
+                        placeholder="Your email address is 543125983a@emailfoxi.pro"
+                        value={formData.name}
+                        onChange={(e) => {
+                          handleChangeUpdate(e);
+                        }}
+                      />
+                    </div>
+                    </div>
+                    <div className="border-b border-gray-300">b</div>
+                   
+
+                    <div className="mx-32 px-7 mt-6 ">
                   {/* button save */}
                   <div className="flex items-center mb-80 space-x-2">
                     <Button className="bg-zinc-800 text-white hover:bg-zinc-700 h-12 font-semibold text-lg mt-6">
                       Close account
                     </Button>
                   </div>
-                </div>
+                  </div> 
+               
+                
               </>
             )}
           </div>
