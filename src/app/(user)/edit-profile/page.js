@@ -529,19 +529,7 @@ export default function Page() {
                 </div>
                 <div className="mx-32 px-7 mt-6">
                   <h2 className="mb-6 font-bold">Profile page settings</h2>
-                  {/* <div className="flex items-center space-x-2 mb-3">
-                    <Checkbox
-                      id="terms"
-                      className="checked:bg-black checked:text-white"
-                    />
-                    <label
-                      htmlFor="terms"
-                      className=" leading-tight tracking-tight text-lg  peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Show your profile to logged-in users
-                    </label>
-                  </div> */}
-
+            
                   <div className="flex items-center space-x-2 mb-6">
                     <label className="flex items-center cursor-pointer relative" htmlFor="check-2">
                       <input

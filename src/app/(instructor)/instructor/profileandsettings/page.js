@@ -11,7 +11,7 @@ import axios from "axios";
 export default function Page() {
   const [formData, setFormData] = useState({
     name: "",
-    headline:"",
+    headline: "",
     social: {
       facebook: "",
       twitter: "",
@@ -22,7 +22,6 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  
 
   const handleChangeUpdate = (event) => {
     const { name, value } = event.target;
@@ -153,9 +152,9 @@ export default function Page() {
                             name="name"
                             placeholder="First Name"
                             value={formData.name}
-                               onChange={(e) => {
+                            onChange={(e) => {
                               handleChangeUpdate(e);
-                            }} 
+                            }}
                           />
                         </div>
                         <div class="w-full md:w-1/2 px-3">
@@ -186,7 +185,7 @@ export default function Page() {
                             type="text"
                             placeholder="Last Name"
                             name="lastName"
-                         /*    value={formData.name}
+                            /*    value={formData.name}
                             onChange={(e) => {
                               handleChangeUpdate(e);
                             }} */
@@ -228,11 +227,11 @@ export default function Page() {
                           </label>
                           <div class="relative">
                             <input
-                                name="headline"
+                              name="headline"
                               value={formData.headline}
                               onChange={(e) => {
                                 handleChangeUpdate(e);
-                              }} 
+                              }}
                               class="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                               id="grid-first-name"
                               type="text"
