@@ -4,27 +4,31 @@ import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { MdEdit } from "react-icons/md";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState("profile");
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     headline: "",
+    language: "",
+    biography: "",
     social: {
+      website: "",
       facebook: "",
       twitter: "",
       linkedin: "",
       youtube: "",
     },
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const handleChangeUpdate = (event) => {
     const { name, value } = event.target;
-
     if (name in formData.social) {
-      // Update social field
       setFormData((prevData) => ({
         ...prevData,
         social: {
@@ -33,24 +37,20 @@ export default function Page() {
         },
       }));
     } else {
-      // Update other fields
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
       }));
     }
   };
-
   const handleSubmit = async (event) => {
-    console.log(formData.social.facebook);
     event.preventDefault();
     setIsLoading(true);
     setError(null);
     setSuccess(null);
-
     try {
       const response = await axios.put(
-        `https://udemy-eosin-eight.vercel.app/user/669904f9ad62aaee0f072f8a`,
+        `http://localhost:3000/user/669904f9ad62aaee0f072f8a`,
 
         formData
       );
@@ -59,12 +59,65 @@ export default function Page() {
       console.error(error);
       setError(
         error.response?.data?.message ||
-        "An error occurred. Please try again later."
+          "An error occurred. Please try again later."
       );
     } finally {
       setIsLoading(false);
     }
   };
+
+  const [passwordData, setPasswordData] = useState({
+    password: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const handlePasswordChange = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    const { password, newPassword, confirmPassword } = passwordData;
+
+    
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match!");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+     
+      const response = await axios.put(
+        `http://localhost:3000/user/change-password/669904f9ad62aaee0f072f8a`,
+        {
+          oldPassword: password,
+          newPassword: newPassword,
+          confirmPassword: confirmPassword,
+        }
+      );
+
+      setSuccess("Password updated successfully!");
+      setPasswordData({ password: "", newPassword: "", confirmPassword: "" });
+    } catch (error) {
+      console.error(error);
+      setError(
+        error.response?.data?.message ||
+          "An error occurred. Please try again later."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePasswordChangeUpdate = (event) => {
+    const { name, value } = event.target;
+    setPasswordData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <>
       <div className="pt-6 px-48 pb-12 grid grid-cols-12">
@@ -81,10 +134,11 @@ export default function Page() {
             <li>
               <a
                 href="#"
-                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${activeTab === "View public profile"
-                  ? "bg-gray-500 text-white"
-                  : "text-black"
-                  }`}
+                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
+                  activeTab === "View public profile"
+                    ? "bg-gray-500 text-white"
+                    : "text-black"
+                }`}
                 onClick={() => setActiveTab("View public profile")}
               >
                 View public profile
@@ -93,10 +147,11 @@ export default function Page() {
             <li>
               <a
                 href="#"
-                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${activeTab === "Profile"
-                  ? "bg-gray-500 text-white"
-                  : "text-black"
-                  }`}
+                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
+                  activeTab === "Profile"
+                    ? "bg-gray-500 text-white"
+                    : "text-black"
+                }`}
                 onClick={() => setActiveTab("Profile")}
               >
                 Profile
@@ -105,10 +160,11 @@ export default function Page() {
             <li>
               <a
                 href="#"
-                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${activeTab === "Photo"
-                  ? "bg-gray-500 text-white"
-                  : "text-black"
-                  }`}
+                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
+                  activeTab === "Photo"
+                    ? "bg-gray-500 text-white"
+                    : "text-black"
+                }`}
                 onClick={() => setActiveTab("Photo")}
               >
                 Photo
@@ -117,11 +173,12 @@ export default function Page() {
             <li>
               <a
                 href="#"
-                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${activeTab === " Account Security"
-                  ? "bg-gray-500 text-white"
-                  : "text-black"
-                  }`}
-                onClick={() => setActiveTab(" Account Security")}
+                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
+                  activeTab === "Account Security"
+                    ? "bg-gray-500 text-white"
+                    : "text-black"
+                }`}
+                onClick={() => setActiveTab("Account Security")}
               >
                 Account Security
               </a>
@@ -129,10 +186,11 @@ export default function Page() {
             <li>
               <a
                 href="#"
-                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${activeTab === "Privacy"
-                  ? "bg-gray-500 text-white"
-                  : "text-black"
-                  }`}
+                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
+                  activeTab === "Privacy"
+                    ? "bg-gray-500 text-white"
+                    : "text-black"
+                }`}
                 onClick={() => setActiveTab("Privacy")}
               >
                 Privacy
@@ -141,10 +199,11 @@ export default function Page() {
             <li>
               <a
                 href="#"
-                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${activeTab === "Close account"
-                  ? "bg-gray-500 text-white"
-                  : "text-black"
-                  }`}
+                className={`block text-sm   hover:bg-gray-500 hover:text-white px-4 py-1 ${
+                  activeTab === "Close account"
+                    ? "bg-gray-500 text-white"
+                    : "text-black"
+                }`}
                 onClick={() => setActiveTab("Close account")}
               >
                 Close account
@@ -180,9 +239,9 @@ export default function Page() {
                         class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                         id="grid-first-name"
                         type="text"
-                        name="name"
+                        name="firstName"
                         placeholder="First Name"
-                        value={formData.name}
+                        value={formData.firstName}
                         onChange={(e) => {
                           handleChangeUpdate(e);
                         }}
@@ -200,6 +259,10 @@ export default function Page() {
                         type="text"
                         placeholder="Last Name"
                         name="lastName"
+                        value={formData.lastName}
+                        onChange={(e) => {
+                          handleChangeUpdate(e);
+                        }}
                       />
                     </div>
                     <div class="w-full  px-3 mt-6 md:mb-0">
@@ -218,7 +281,7 @@ export default function Page() {
                           id="grid-first-name"
                           type="text"
                           placeholder="Headline"
-                        /*     value={bio}
+                          /*     value={bio}
                             onChange={handleChange} */
                         />
                         <span className="absolute top-0 right-0 m-2 text-gray-500">
@@ -235,40 +298,47 @@ export default function Page() {
                         class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                         for="grid-biography"
                       ></label>
-                      <RichText />
+                      <RichText
+                        value={formData.biography}
+                        name="biography"
+                        onChange={(e) => {
+                          handleChangeUpdate(e);
+                        }}
+                      />
                       <div className="text-gray-600 text-xs align-center mt-2">
                         Links and coupon codes are not permitted in this
                         section.
                       </div>
                     </div>
-                    <div className="w-ful  px-3 mt-6 md:mb-0 border-b border-gray-300 ">
+                    <div className="w-full px-3 mt-6 md:mb-0 border-b border-gray-300">
                       <label
-                        for="grid-youtube-url"
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                      ></label>
-                      <select
-                        id="laguage"
-                        class=" border  border-black py-3 px-4 mb-3 text-gray-900 text-sm  block w-full h-12"
+                        htmlFor="language"
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                       >
-                        <option className="  " selected>
-                          {" "}
-                          English (US)
-                        </option>
-                        <option value="US"> English (US)</option>
-                        <option value="CA">Canada</option>
-                        <option value="FR">France</option>
-                        <option value="DE">Germany</option>
-                        <option value="ES">Spain</option>
-                        <option value="IT">Italy</option>
+                        Language
+                      </label>
+                      <select
+                        name="language"
+                        value={formData.language}
+                        onChange={handleChangeUpdate}
+                        id="language" 
+                        className="border border-black py-3 px-4 mb-3 text-gray-900 text-sm block w-full h-12"
+                      >
+                        <option value="English (US)">English (US)</option>
+                        <option value="Canada">Canada</option>
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Italy">Italy</option>
                         <option value="UK">United Kingdom</option>
-                        <option value="NL">Netherlands</option>
-                        <option value="AU">Australia</option>
-                        <option value="NZ">New Zealand</option>
-                        <option value="IN">India</option>
-                        <option value="BR">Brazil</option>
-                        <option value="MX">Mexico</option>
-                        <option value="CN">China</option>
-                        <option value="RU">Russia</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="Australia">Australia</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="India">India</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="China">China</option>
+                        <option value="Russia">Russia</option>
                       </select>
                     </div>
 
@@ -283,7 +353,11 @@ export default function Page() {
                         id="grid-first-name"
                         type="text"
                         placeholder="Website (http(s)://..)"
-                        name="lastName"
+                        name="website"
+                        value={formData.social.website}
+                        onChange={(e) => {
+                          handleChangeUpdate(e);
+                        }}
                       />
                     </div>
                     <div className="w-full  px-3 mt-6 md:mb-0">
@@ -529,9 +603,12 @@ export default function Page() {
                 </div>
                 <div className="mx-32 px-7 mt-6">
                   <h2 className="mb-6 font-bold">Profile page settings</h2>
-            
+
                   <div className="flex items-center space-x-2 mb-6">
-                    <label className="flex items-center cursor-pointer relative" htmlFor="check-2">
+                    <label
+                      className="flex items-center cursor-pointer relative"
+                      htmlFor="check-2"
+                    >
                       <input
                         type="checkbox"
                         defaultChecked
@@ -539,18 +616,35 @@ export default function Page() {
                         id="check-2"
                       />
                       <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3.5 w-3.5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
                         </svg>
                       </span>
                     </label>
-                    <label className="cursor-pointer ml-3 text-lg leading-tight tracking-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="check-2">
+                    <label
+                      className="cursor-pointer ml-3 text-lg leading-tight tracking-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      htmlFor="check-2"
+                    >
                       Show your profile to logged-in users
                     </label>
                   </div>
                   {/* Show courses you're taking on your profile page */}
                   <div className="flex items-center space-x-2 mb-3">
-                    <label className="flex items-center cursor-pointer relative" htmlFor="check-3">
+                    <label
+                      className="flex items-center cursor-pointer relative"
+                      htmlFor="check-3"
+                    >
                       <input
                         type="checkbox"
                         defaultChecked
@@ -558,122 +652,108 @@ export default function Page() {
                         id="check-3"
                       />
                       <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" strokeWidth="1">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3.5 w-3.5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          stroke="currentColor"
+                          strokeWidth="1"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          ></path>
                         </svg>
                       </span>
                     </label>
-                    <label className="cursor-pointer ml-3 text-lg leading-tight tracking-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70" htmlFor="check-3">
+                    <label
+                      className="cursor-pointer ml-3 text-lg leading-tight tracking-tight peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      htmlFor="check-3"
+                    >
                       Show courses you're taking on your profile pag
                     </label>
                   </div>
                   <Button className="bg-gray-900 text-white hover:bg-gray-700 mt-6 w-24 mb-80 h-14 font-bold text-lg">
                     Save
                   </Button>
-
                 </div>
-
-
-
-
-
-
               </>
             )}
 
-
-
             {/* Account Security Tap */}
-            {activeTab === " Account Security" && (
+            {activeTab === "Account Security" && (
               <>
                 <div className="flex border-b border-gray-300 py-4">
-                  <div class="mx-auto max-w-7xl px-6 text-center">
+                  <div className="mx-auto max-w-7xl px-6 text-center">
                     <h1 className="font-heading font-bold leading-tight tracking-normal text-lg sm:text-xl md:text-2xl max-w-3xl">
                       Account
                     </h1>
-                    <p className="font-text mt-2 leading-6 ">
+                    <p className="font-text mt-2 leading-6">
                       Edit your account settings and change your password here
                     </p>
                   </div>
                 </div>
                 <div className="mx-32 px-7">
-                  <div class="w-full relative px-3 mt-6">
-                    <label class="block mb-2  font-semibold">
-                      <h2 className="font-semibold ">Email:</h2>
-
-                    </label>
-
-
-                    <div class="relative">
-                      <input type="email" class="appearance-none block w-full  text-gray-700 border border-black py-4 px-4 my-3 leading-tight focus:outline-none focus:bg-white" placeholder="Your email address is 030cd5fe3b@emailfoxi.pro" />
-                      <button class="absolute right-1 top-1  border border-l-black  text-4xl transition-all hover:shadow  hover:bg-gray-300 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-                        <MdEdit />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                {/* border */}
-                <div className="border-b border-gray-300 mt-6"></div>
-                <div className="mx-32 px-7">
-                  <form onSubmit={handleSubmit}>
-                    <h2 className="font-semibold px-3 mt-6">password:</h2>
-                    <div class="w-full px-3 mt-2 m mb-6 md:mb-0">
+                  <form onSubmit={handlePasswordChange}>
+                    <h2 className="font-semibold px-3 mt-6">Password:</h2>
+                    <div className="w-full px-3 mt-2 mb-6 md:mb-0">
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-first-name"
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="current-password"
                       ></label>
                       <input
-                        class="appearance-none block w-full  text-gray-700 border border-black  py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-first-name"
-                        type="text"
-                        name="name"
+                        className="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="current-password"
+                        type="password"
+                        name="password"
+                        value={passwordData.password}
+                        onChange={handlePasswordChangeUpdate}
                         placeholder="Enter current password"
-                        value={formData.name}
-                        onChange={(e) => {
-                          handleChangeUpdate(e);
-                        }}
                       />
                     </div>
 
-                    <div class="w-full  px-3 mt-6 md:mb-0">
+                    <div className="w-full px-3 mt-6 md:mb-0">
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-first-name"
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="new-password"
                       ></label>
                       <input
-                        class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-first-name"
-                        type="text"
+                        className="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="new-password"
+                        type="password"
+                        name="newPassword"
+                        value={passwordData.newPassword}
+                        onChange={handlePasswordChangeUpdate}
                         placeholder="Enter new password"
-                        name="lastName"
                       />
                     </div>
-                    <div class="w-full  px-3 mt-6 md:mb-0">
+
+                    <div className="w-full px-3 mt-6 md:mb-0">
                       <label
-                        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-first-name"
+                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                        htmlFor="confirm-password"
                       ></label>
                       <input
-                        class="appearance-none block w-full  text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        id="grid-first-name"
-                        type="text"
+                        className="appearance-none block w-full text-gray-700 border border-black py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                        id="confirm-password"
+                        type="password"
+                        name="confirmPassword"
+                        value={passwordData.confirmPassword}
+                        onChange={handlePasswordChangeUpdate}
                         placeholder="Re-type new password"
-                        name="lastName"
                       />
                     </div>
-                    {/* button save */}
+
+                    {/* Save button */}
                     <div className="flex items-center mb-80 space-x-2">
                       <Button className="bg-zinc-800 text-white hover:bg-zinc-700 h-16 font-bold text-lg mt-6">
                         Change password
                       </Button>
                     </div>
                   </form>
-
                 </div>
-
-
-
-
               </>
             )}
           </div>
